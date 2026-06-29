@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DoYouKnowMe? - Téléphone sans fil social</title>
+  <!-- Google Fonts for custom typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Outer Wrapper containing background effects -->
+  <div class="game-container">
+    <div id="splash-overlay"></div>
+    
+    <!-- Header -->
+    <header class="game-header">
+      <div class="header-left">
+        <button class="lang-btn" id="langBtn">
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18">
+            <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,19.93C7.05,19.44 4,16.08 4,12C4,11.38 4.08,10.78 4.21,10.21L9,15V16A2,2 0 0,0 11,18M17.9,17.39C17.64,16.58 16.9,16 16,16H15V13A1,1 0 0,0 14,12H8V10H10A1,1 0 0,0 11,9V7H13A2,2 0 0,0 15,5V4.59C17.93,5.77 20,8.64 20,12C20,14.08 19.2,15.97 17.9,17.39Z" />
+          </svg>
+          <span>FR</span>
+        </button>
+      </div>
+      
+      <div class="header-logo">
+        <img src="logo.png" alt="DoYouKnowMe?" class="logo-img">
+        <div class="logo-sub">JEU SOCIAL DE COMPLICITÉ</div>
+      </div>
+      
+      <div class="header-right">
+        <!-- Element left empty to maintain layout symmetry -->
+      </div>
+    </header>
+
+    <!-- Main Screen Area -->
+    <main class="game-main-content">
+      
+      <!-- SCREEN 1: LOGIN / CREATION -->
+      <section id="screen-login" class="screen-view active">
+        <div class="two-panel-layout">
+          <!-- Left Panel: Create Player -->
+          <div class="panel-card glass-panel" id="login-left-card">
+            <div class="card-tabs">
+              <button class="tab-btn active">ANONYME</button>
+              <button class="tab-btn disabled" disabled>AUTHENTIFICATION</button>
+            </div>
+            
+            <div class="card-body character-creator">
+              <div class="avatar-selector">
+                <div class="avatar-preview-container" id="avatar-preview-box">
+                  <!-- Vector Avatar will be rendered here dynamically -->
+                </div>
+                <button class="random-avatar-btn" id="randomizeAvatarBtn" title="Changer de personnage">
+                  <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="currentColor" d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z" />
+                  </svg>
+                </button>
+              </div>
+
+
+              
+              <div class="input-group">
+                <label for="nickname-input">CHOISIS UN PERSONNAGE ET UN SURNOM</label>
+                <input type="text" id="nickname-input" placeholder="AIRMAX90" maxlength="15" autocomplete="off">
+              </div>
+
+              <div class="lobby-code-group">
+                <label for="room-input">CODE DE SALON (OPTIONNEL)</label>
+                <input type="text" id="room-input" placeholder="EX: XYZ123" maxlength="6" style="text-transform: uppercase;">
+              </div>
+              
+              <button class="primary-btn" id="startGameBtn">
+                <span class="btn-icon">▶</span>
+                <span>DÉMARRER</span>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Right Panel: How to play -->
+          <div class="panel-card glass-panel" id="login-right-card">
+            <h3 class="panel-title text-green">COMMENT JOUER</h3>
+            <div class="card-body tutorial-body">
+              <div class="tutorial-slide" id="tutorial-slide">
+                <div class="tutorial-illustration">
+                  <div class="tutorial-graphic" id="tutorial-graphic-container"></div>
+                </div>
+                <div class="tutorial-text">
+                  <div class="tutorial-badge-container">
+                    <span class="tutorial-badge" id="tutorial-badge">ÉTAPE 1</span>
+                  </div>
+                  <h4 id="tutorial-title">📞 PASSE UN COUP DE FIL !</h4>
+                  <p id="tutorial-desc">Lance un appel vocal avec tes potes (Discord, Zoom...) et partage-leur le code secret du salon !</p>
+                </div>
+              </div>
+              
+              <div class="tutorial-controls">
+                <button class="nav-arrow" id="tut-prev">◀</button>
+                <div class="pagination-dots" id="tut-dots">
+                  <span class="dot active"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+                <button class="nav-arrow" id="tut-next">▶</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN 2: LOBBY -->
+      <section id="screen-lobby" class="screen-view">
+        <div class="two-panel-layout">
+          <!-- Left Panel: Players List -->
+          <div class="panel-card glass-panel">
+            <h3 class="panel-title">JOUEURS (<span id="player-count">0</span>)</h3>
+            <div class="card-body players-list-body" id="lobby-players-list">
+              <!-- Players list rendered dynamically -->
+            </div>
+          </div>
+          
+          <!-- Right Panel: Lobby settings / code -->
+          <div class="panel-card glass-panel">
+            <h3 class="panel-title text-green">SALON DE JEU</h3>
+            <div class="card-body lobby-controls">
+              <div class="lobby-code-box">
+                <span>CODE DU SALON</span>
+                <h2 id="display-lobby-code">------</h2>
+                <button class="secondary-btn btn-sm" id="copyCodeBtn">Copier le lien</button>
+              </div>
+
+              <div class="lobby-info-text">
+                <p>Le jeu se déroule en <strong>3 manches</strong> de questions. Chaque joueur passera au rôle de Questionneur à son tour.</p>
+                <p class="warning-text">Le jeu démarrera automatiquement dès que tous les joueurs connectés cliqueront sur "PRÊT" !</p>
+              </div>
+
+              <button class="primary-btn ready-btn" id="readyBtn">
+                <span>S'INSCRIRE COMME PRÊT</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN 3: PICKING QUESTION -->
+      <section id="screen-picking" class="screen-view">
+        <div class="one-panel-layout">
+          <div class="panel-card glass-panel max-w-lg">
+            <!-- Header for Questioner -->
+            <div id="picking-questioner-view" class="picking-role-view">
+              <h3 class="panel-title">C'EST VOTRE TOUR DE CHOISIR !</h3>
+              <div class="card-body">
+                <p class="instructions-text">Proposez une question pour que les autres joueurs essaient de deviner votre réponse. Vous pouvez écrire votre propre question ou en choisir une au hasard.</p>
+                
+                <div class="question-composer">
+                  <div class="input-group">
+                    <label for="question-input">VOTRE QUESTION</label>
+                    <textarea id="question-input" rows="3" placeholder="Saisissez une question ici..."></textarea>
+                  </div>
+                  
+                  <div class="picker-actions">
+                    <button class="secondary-btn" id="randomQuestionBtn">
+                      <span class="btn-icon">🎲</span>
+                      <span>ALÉATOIRE</span>
+                    </button>
+                    <span class="category-badge" id="question-category-display">Custom</span>
+                  </div>
+                </div>
+
+                <button class="primary-btn w-full mt-4" id="submitQuestionBtn">
+                  <span>LANCER LA QUESTION</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Header for Guesser -->
+            <div id="picking-guesser-view" class="picking-role-view">
+              <h3 class="panel-title text-orange">EN ATTENTE DU QUESTIONNEUR...</h3>
+              <div class="card-body center-content">
+                <div class="waiting-animation">
+                  <div class="bounce-avatar" id="waiting-questioner-avatar"></div>
+                  <p class="pulse-text"><span id="waiting-questioner-name">AIRMAX90</span> choisit une question...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN 4: ANSWERING -->
+      <section id="screen-answering" class="screen-view">
+        <div class="one-panel-layout">
+          <div class="panel-card glass-panel max-w-lg">
+            <div class="panel-header-timer">
+              <div class="round-counter">Manche <span id="answering-round">1</span> / <span id="answering-max-rounds">3</span></div>
+              <div class="timer-box" id="answering-timer">45</div>
+            </div>
+
+            <!-- Guesser answering view -->
+            <div id="answering-guesser-view" class="answering-role-view">
+              <h3 class="panel-title text-blue">DEVINEZ LA RÉPONSE DE <span id="answering-questioner-name">AIRMAX90</span> !</h3>
+              <div class="card-body">
+                <div class="question-display-box">
+                  <span class="category-tag" id="answering-category">Food</span>
+                  <h2 class="question-text" id="answering-question-text">Quel est mon plat préféré quand je suis fatigué ?</h2>
+                </div>
+
+                <div class="input-group mt-4">
+                  <label for="answer-input">VOTRE RÉPONSE (QUE DIRAIENT-ILS ?)</label>
+                  <input type="text" id="answer-input" placeholder="Écrivez votre réponse ici..." autocomplete="off">
+                </div>
+
+                <button class="primary-btn w-full mt-4" id="submitAnswerBtn">
+                  <span>SOUMETTRE MA RÉPONSE</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Questioner waiting view -->
+            <div id="answering-questioner-view" class="answering-role-view">
+              <h3 class="panel-title">LES AUTRES JOUEURS RÉPONDENT...</h3>
+              <div class="card-body">
+                <div class="question-display-box">
+                  <span class="category-tag" id="answering-q-category">Food</span>
+                  <h2 class="question-text" id="answering-q-text">Quel est mon plat préféré quand je suis fatigué ?</h2>
+                </div>
+                
+                <div class="answering-status-list" id="answering-status-container">
+                  <!-- List of players who have answered -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN 5: JUDGING -->
+      <section id="screen-judging" class="screen-view">
+        <div class="one-panel-layout">
+          <div class="panel-card glass-panel max-w-lg">
+            <h3 class="panel-title">RÉVÉLATION & JUGEMENT</h3>
+            
+            <div class="card-body">
+              <div class="question-display-box sm">
+                <h4 class="judged-q-header">Question posée par <span id="judging-questioner-name">AIRMAX90</span> :</h4>
+                <p class="question-text-sm" id="judging-question-text">Quel est mon plat préféré quand je suis fatigué ?</p>
+              </div>
+
+              <!-- Answer Reveal Box (Theater effect) -->
+              <div class="answer-reveal-theater">
+                <div class="reveal-badge">RÉPONSE PROPOSÉE PAR <span id="reveal-player-name">PigeonDev</span></div>
+                <div class="reveal-bubble" id="reveal-answer-bubble">
+                  "Des araignées géantes !"
+                </div>
+              </div>
+
+              <!-- Questioner Controls -->
+              <div id="judging-questioner-controls" class="judging-role-controls">
+                <p class="control-label">EST-CE QUE CETTE RÉPONSE EST CORRECTE ?</p>
+                <div class="judging-buttons">
+                  <button class="judge-btn invalid-btn" id="judgeInvalidBtn">
+                    <span class="judge-icon">✖</span>
+                    <span>INCORRECT</span>
+                  </button>
+                  <button class="judge-btn valid-btn" id="judgeValidBtn">
+                    <span class="judge-icon">✔</span>
+                    <span>CORRECT</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Guesser Waiting Info -->
+              <div id="judging-guesser-controls" class="judging-role-controls">
+                <div class="waiting-animation mt-2">
+                  <div class="bounce-avatar" id="judging-waiting-avatar"></div>
+                  <p class="pulse-text"><span id="judging-active-questioner">AIRMAX90</span> évalue les réponses (<span id="judging-progress">1</span> / <span id="judging-total-answers">3</span>)...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN 6: RESULTS -->
+      <section id="screen-results" class="screen-view">
+        <div class="one-panel-layout">
+          <div class="panel-card glass-panel max-w-lg">
+            <h3 class="panel-title text-green">TABLEAU DES RÉSULTATS (AFFINITÉS)</h3>
+            
+            <div class="card-body results-body">
+              <p class="results-intro">Voici qui vous connaît le mieux !</p>
+              
+              <!-- Results leaderboard -->
+              <div class="results-leaderboard" id="results-leaderboard-container">
+                <!-- Sorted list of scores with ranking styles -->
+              </div>
+
+              <!-- Affinity Connections -->
+              <div class="affinities-section">
+                <h4 class="affinity-section-title">🧬 LES COMPLICITÉS DÉCOUVERTES</h4>
+                <div class="affinity-grid" id="affinity-connections-container">
+                  <!-- Custom visual bubble link cards will be rendered here -->
+                </div>
+              </div>
+
+              <button class="primary-btn w-full mt-6" id="restartGameBtn">
+                <span>REJOUER UNE PARTIE</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="game-footer">
+      <div class="footer-brand">DoYouKnowMe</div>
+      <div class="footer-links">
+        <a href="#">CONDITIONS D'UTILISATION</a>
+        <span class="separator">|</span>
+        <a href="#">CONFIDENTIALITÉ</a>
+        <span class="separator">|</span>
+        <a href="#">RESSOURCES</a>
+        <span class="separator">|</span>
+        <a href="#">BLOG</a>
+        <span class="separator">|</span>
+        <a href="#">CONTACT</a>
+      </div>
+      <div class="footer-socials">
+        <span class="social-icon">🎵</span>
+        <span class="social-icon">📺</span>
+        <span class="social-icon">💬</span>
+        <span class="social-icon">📸</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Socket.io client script loading -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>

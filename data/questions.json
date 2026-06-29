@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "text": "Quel est mon plat préféré quand je suis fatigué ?",
+    "category": "Food"
+  },
+  {
+    "id": 2,
+    "text": "Si je devais vivre dans un autre pays, ce serait lequel ?",
+    "category": "Travel"
+  },
+  {
+    "id": 3,
+    "text": "Quelle est ma plus grande phobie irrationnelle ?",
+    "category": "Personal"
+  },
+  {
+    "id": 4,
+    "text": "Est-ce que je préfère me lever tôt ou me coucher tard ?",
+    "category": "Lifestyle"
+  },
+  {
+    "id": 5,
+    "text": "Quel est le dernier film ou série qui m'a fait pleurer ?",
+    "category": "Pop Culture"
+  }
+]
