@@ -417,21 +417,21 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: min(2.5vh, 24px);
+  gap: 12px;
 }
 
 .avatar-selector {
   position: relative;
-  margin-top: min(1vh, 10px);
+  margin-top: 5px;
 }
 
 .avatar-preview-container {
-  width: min(15vh, 160px);
-  height: min(15vh, 160px);
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
-  border: 5px solid var(--color-dark);
+  border: 4px solid var(--color-dark);
   background: #ffd2ea;
-  box-shadow: 6px 6px 0 var(--color-dark);
+  box-shadow: 5px 5px 0 var(--color-dark);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -440,32 +440,32 @@ body {
 }
 
 .avatar-preview-container svg, .avatar-preview-container img {
-  width: min(11vh, 125px);
-  height: min(11vh, 125px);
+  width: 85px;
+  height: 85px;
   filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
 }
 
 .random-avatar-btn {
   position: absolute;
-  bottom: -5px;
-  right: -5px;
+  bottom: -3px;
+  right: -3px;
   background: var(--neon-cyan);
-  border: 4px solid var(--color-dark);
+  border: 3.5px solid var(--color-dark);
   color: var(--color-dark);
-  width: min(5vh, 52px);
-  height: min(5vh, 52px);
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 4px 4px 0 var(--color-dark);
+  box-shadow: 3px 3px 0 var(--color-dark);
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .random-avatar-btn:hover {
-  transform: scale(1.15) rotate(180deg);
-  box-shadow: 6px 6px 0 var(--color-dark);
+  transform: scale(1.1) rotate(180deg);
+  box-shadow: 4px 4px 0 var(--color-dark);
 }
 
 .random-avatar-btn:active {
@@ -478,12 +478,12 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
 }
 
 label {
   font-family: var(--font-display);
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 900;
   letter-spacing: 1px;
   color: var(--color-dark);
@@ -493,21 +493,21 @@ label {
 input[type="text"], textarea {
   width: 100%;
   background: #ffffff;
-  border: 4px solid var(--color-dark);
-  border-radius: 18px;
+  border: 3.5px solid var(--color-dark);
+  border-radius: 12px;
   color: var(--color-dark);
-  padding: 16px 20px;
+  padding: 10px 16px;
   font-family: var(--font-main);
   font-weight: 800;
-  font-size: 18px;
+  font-size: 15px;
   outline: none;
-  box-shadow: 4px 4px 0 rgba(0,0,0,0.08);
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.08);
   transition: all 0.15s ease;
 }
 
 input[type="text"]:focus, textarea:focus {
   border-color: var(--neon-magenta);
-  box-shadow: 6px 6px 0 var(--color-dark);
+  box-shadow: 4px 4px 0 var(--color-dark);
   transform: translateY(-2px);
 }
 
@@ -516,42 +516,42 @@ input[type="text"]:focus, textarea:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
   background: var(--neon-green);
-  border: 5px solid var(--color-dark);
-  color: var(--color-dark);
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 22px;
-  padding: 18px 36px;
-  border-radius: 20px;
-  cursor: pointer;
-  box-shadow: 0 10px 0 var(--color-dark), 0 16px 20px rgba(0,0,0,0.15);
-  transition: all 0.1s ease;
-  width: 100%;
-  text-transform: uppercase;
-  margin-top: 15px;
-}
-
-.primary-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 0 var(--color-dark), 0 10px 15px rgba(0,0,0,0.1);
-}
-
-.primary-btn:active {
-  transform: translateY(8px);
-  box-shadow: 0 2px 0 var(--color-dark), 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.secondary-btn {
-  background: var(--neon-cyan);
   border: 4px solid var(--color-dark);
   color: var(--color-dark);
   font-family: var(--font-display);
   font-weight: 900;
   font-size: 16px;
-  padding: 12px 28px;
-  border-radius: 16px;
+  padding: 12px 24px;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 var(--color-dark), 0 8px 12px rgba(0,0,0,0.15);
+  transition: all 0.1s ease;
+  width: 100%;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 var(--color-dark), 0 6px 10px rgba(0,0,0,0.1);
+}
+
+.primary-btn:active {
+  transform: translateY(6px);
+  box-shadow: 0 1px 0 var(--color-dark), 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.secondary-btn {
+  background: var(--neon-cyan);
+  border: 3.5px solid var(--color-dark);
+  color: var(--color-dark);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 14px;
+  padding: 10px 22px;
+  border-radius: 12px;
   cursor: pointer;
   box-shadow: 4px 4px 0 var(--color-dark);
   transition: all 0.15s ease;
@@ -599,8 +599,8 @@ input[type="text"]:focus, textarea:focus {
 }
 
 .tutorial-illustration {
-  width: 210px;
-  height: 160px;
+  width: 170px;
+  height: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -608,11 +608,11 @@ input[type="text"]:focus, textarea:focus {
 
 .comic-panel-wrapper {
   position: relative;
-  width: 170px;
-  height: 130px;
-  border: 4px solid var(--color-dark);
-  box-shadow: 6px 6px 0 var(--color-dark);
-  border-radius: 20px;
+  width: 130px;
+  height: 95px;
+  border: 3.5px solid var(--color-dark);
+  box-shadow: 4px 4px 0 var(--color-dark);
+  border-radius: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -631,8 +631,8 @@ input[type="text"]:focus, textarea:focus {
 .comic-panel-wrapper.color-green { background: var(--neon-green); }
 
 .comic-char-img {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   object-fit: cover;
   position: absolute;
   top: 50%;
@@ -643,17 +643,17 @@ input[type="text"]:focus, textarea:focus {
 
 .comic-bubble {
   position: absolute;
-  top: -16px;
-  right: -24px;
+  top: -12px;
+  right: -16px;
   background: #ffffff;
-  border: 3px solid var(--color-dark);
-  border-radius: 12px;
-  padding: 4px 10px;
+  border: 2.5px solid var(--color-dark);
+  border-radius: 10px;
+  padding: 3px 8px;
   font-family: var(--font-display);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 900;
   color: var(--color-dark);
-  box-shadow: 2px 2px 0 var(--color-dark);
+  box-shadow: 1.5px 1.5px 0 var(--color-dark);
   transform: rotate(6deg);
   white-space: nowrap;
 }
@@ -661,47 +661,47 @@ input[type="text"]:focus, textarea:focus {
 .tutorial-badge-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .tutorial-badge {
   background: var(--neon-magenta);
-  border: 2.5px solid var(--color-dark);
+  border: 2px solid var(--color-dark);
   color: var(--color-white);
   font-family: var(--font-display);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 900;
-  padding: 4px 14px;
+  padding: 3px 12px;
   border-radius: 50px;
-  box-shadow: 2px 2px 0 var(--color-dark);
+  box-shadow: 1.5px 1.5px 0 var(--color-dark);
 }
 
 .tutorial-text h4 {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 16px;
   color: var(--color-dark);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .tutorial-text p {
-  font-size: 15px;
-  line-height: 1.5;
+  font-size: 12.5px;
+  line-height: 1.4;
   color: var(--color-muted);
-  max-width: 320px;
+  max-width: 280px;
 }
 
 .tutorial-controls {
   display: flex;
   align-items: center;
-  gap: 24px;
-  margin-top: 15px;
+  gap: 16px;
+  margin-top: 10px;
 }
 
 .nav-arrow {
   background: none;
   border: none;
   color: var(--color-dark);
-  font-size: 24px;
+  font-size: 20px;
   cursor: pointer;
   transition: transform 0.15s ease;
 }
