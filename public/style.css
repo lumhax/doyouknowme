@@ -297,10 +297,15 @@ body {
 .screen-view {
   display: none;
   width: 100%;
+  max-height: 100%;
+  height: 100%;
 }
 
 .screen-view.active {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .two-panel-layout {
@@ -308,6 +313,8 @@ body {
   grid-template-columns: 1.1fr 0.9fr;
   gap: 20px;
   width: 100%;
+  max-height: 100%;
+  min-height: 0;
 }
 
 .one-panel-layout {
@@ -315,6 +322,8 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
+  max-height: 100%;
+  min-height: 0;
 }
 
 .max-w-lg {
