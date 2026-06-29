@@ -394,6 +394,60 @@ function setupEventListeners() {
       socket.emit('restart-game');
     });
   });
+
+  // Footer Links Modals
+  const infoModal = document.getElementById('infoModal');
+  const infoModalBody = document.getElementById('infoModalBody');
+  const infoModalCloseBtn = document.getElementById('infoModalCloseBtn');
+
+  function openInfoModal(type) {
+    if (modalContent[type] && infoModalBody && infoModal) {
+      infoModalBody.innerHTML = modalContent[type];
+      infoModal.classList.add('active');
+    }
+  }
+
+  function closeInfoModal() {
+    if (infoModal) {
+      infoModal.classList.remove('active');
+    }
+  }
+
+  const termsLink = document.getElementById('link-terms');
+  if (termsLink) {
+    termsLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      openInfoModal('terms');
+    });
+  }
+
+  const privacyLink = document.getElementById('link-privacy');
+  if (privacyLink) {
+    privacyLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      openInfoModal('privacy');
+    });
+  }
+
+  const contactLink = document.getElementById('link-contact');
+  if (contactLink) {
+    contactLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      openInfoModal('contact');
+    });
+  }
+
+  if (infoModalCloseBtn) {
+    infoModalCloseBtn.addEventListener('click', closeInfoModal);
+  }
+
+  if (infoModal) {
+    infoModal.addEventListener('click', (e) => {
+      if (e.target === infoModal) {
+        closeInfoModal();
+      }
+    });
+  }
 }
 
 // SOCKET MESSAGE HANDLING
@@ -685,3 +739,42 @@ function renderResultsView(state) {
     `;
   }
 }
+
+// MODALS CONTENT (Terms, Privacy, Contact)
+const modalContent = {
+  terms: `
+    <h2>⚖️ Conditions d'Utilisation</h2>
+    <p>Bienvenue sur <strong>DoYouKnowMe?</strong>, le crash test ultime de tes amitiés !</p>
+    <ul>
+      <li><strong>Gratuité :</strong> Le jeu est entièrement gratuit et accessible sans inscription.</li>
+      <li><strong>Règle d'or :</strong> Soyez respectueux dans les questions personnalisées et vos réponses. Pas d'insultes ni de contenu offensant.</li>
+      <li><strong>Clause de fun :</strong> Le créateur (Lumhax) se dégage de toute responsabilité en cas de dispute de couple, de rupture amicale ou de dossier honteux révélé en cours de partie.</li>
+      <li><strong>Modifications :</strong> Le jeu peut être mis à jour à tout moment pour ajouter de nouvelles questions.</li>
+    </ul>
+    <p>En jouant, vous acceptez de vous amuser dans la bienveillance !</p>
+  `,
+  privacy: `
+    <h2>🛡️ Confidentialité</h2>
+    <p>Nous respectons votre vie privée et celle de vos potes.</p>
+    <ul>
+      <li><strong>Zéro Cookie :</strong> Pas de cookie de traçage publicitaire.</li>
+      <li><strong>Pas de base de données :</strong> Vos questions, réponses et pseudos transitent en temps réel via des WebSockets pour le bon déroulement de la partie. Rien n'est conservé de manière persistante sur le serveur après la fermeture de votre salon.</li>
+      <li><strong>Données locales :</strong> Seuls vos réglages de volume peuvent être stockés localement sur votre navigateur.</li>
+    </ul>
+    <p>Jouez l'esprit tranquille, vos dossiers restent secrets !</p>
+  `,
+  contact: `
+    <h2>📬 Contact</h2>
+    <p>Tu as rencontré un bug ? Tu as une idée de question géniale à soumettre ? Ou tu souhaites juste m'envoyer un message sympa ?</p>
+    <p>Écris-moi directement par mail :</p>
+    <p style="text-align: center; margin: 24px 0;">
+      <a href="mailto:lumhaxdev@gmail.com" style="font-size: 15px; font-weight: 900; background: var(--neon-cyan); border: 2.5px solid var(--color-dark); padding: 10px 20px; border-radius: 8px; box-shadow: 3px 3px 0 var(--color-dark); display: inline-block; text-decoration: none; color: var(--color-dark); text-transform: uppercase;">
+        ✉️ lumhaxdev@gmail.com
+      </a>
+    </p>
+    <p>Tu peux également me suivre ou m'envoyer un message privé sur Twitter / X :</p>
+    <p style="text-align: center; font-weight: bold;">
+      <a href="https://x.com/lumhaxdev" target="_blank">@lumhaxdev</a>
+    </p>
+  `
+};

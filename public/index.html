@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DoYouKnowMe? - Téléphone sans fil social</title>
+  <title>DoYouKnowMe? - Voyons qui sont tes vrais potes !</title>
   <!-- Google Fonts for custom typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Outfit:wght@100..900&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <!-- Outer Wrapper containing background effects -->
   <div class="game-container">
@@ -20,23 +23,24 @@
         </button>
       </div>
     </div>
-    
+
     <!-- Header -->
     <header class="game-header">
       <div class="header-left">
         <button class="lang-btn" id="langBtn">
           <svg class="icon" viewBox="0 0 24 24" width="18" height="18">
-            <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,19.93C7.05,19.44 4,16.08 4,12C4,11.38 4.08,10.78 4.21,10.21L9,15V16A2,2 0 0,0 11,18M17.9,17.39C17.64,16.58 16.9,16 16,16H15V13A1,1 0 0,0 14,12H8V10H10A1,1 0 0,0 11,9V7H13A2,2 0 0,0 15,5V4.59C17.93,5.77 20,8.64 20,12C20,14.08 19.2,15.97 17.9,17.39Z" />
+            <path fill="currentColor"
+              d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,19.93C7.05,19.44 4,16.08 4,12C4,11.38 4.08,10.78 4.21,10.21L9,15V16A2,2 0 0,0 11,18M17.9,17.39C17.64,16.58 16.9,16 16,16H15V13A1,1 0 0,0 14,12H8V10H10A1,1 0 0,0 11,9V7H13A2,2 0 0,0 15,5V4.59C17.93,5.77 20,8.64 20,12C20,14.08 19.2,15.97 17.9,17.39Z" />
           </svg>
           <span>FR</span>
         </button>
       </div>
-      
+
       <div class="header-logo">
         <img src="logo.png" alt="DoYouKnowMe?" class="logo-img">
         <div class="logo-sub">VOYONS QUI SONT TES VRAIS POTES !</div>
       </div>
-      
+
       <div class="header-right">
         <button class="sound-toggle-btn" id="volumeBtn" title="Activer/Couper le son">
           <span class="sound-icon">🔊</span>
@@ -46,7 +50,7 @@
 
     <!-- Main Screen Area -->
     <main class="game-main-content">
-      
+
       <!-- SCREEN 1: LOGIN / CREATION -->
       <section id="screen-login" class="screen-view active">
         <div class="two-panel-layout">
@@ -56,7 +60,7 @@
               <button class="tab-btn active">ANONYME</button>
               <button class="tab-btn disabled" disabled>AUTHENTIFICATION</button>
             </div>
-            
+
             <div class="card-body character-creator">
               <div class="avatar-selector">
                 <div class="avatar-preview-container" id="avatar-preview-box">
@@ -64,13 +68,14 @@
                 </div>
                 <button class="random-avatar-btn" id="randomizeAvatarBtn" title="Changer de personnage">
                   <svg viewBox="0 0 24 24" width="24" height="24">
-                    <path fill="currentColor" d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z" />
+                    <path fill="currentColor"
+                      d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z" />
                   </svg>
                 </button>
               </div>
 
 
-              
+
               <div class="input-group">
                 <label for="nickname-input">CHOISIS UN PERSONNAGE ET UN SURNOM</label>
                 <input type="text" id="nickname-input" placeholder="AIRMAX90" maxlength="15" autocomplete="off">
@@ -78,16 +83,17 @@
 
               <div class="lobby-code-group">
                 <label for="room-input">CODE DE SALON (OPTIONNEL)</label>
-                <input type="text" id="room-input" placeholder="EX: XYZ123" maxlength="6" style="text-transform: uppercase;">
+                <input type="text" id="room-input" placeholder="EX: XYZ123" maxlength="6"
+                  style="text-transform: uppercase;">
               </div>
-              
+
               <button class="primary-btn" id="startGameBtn">
                 <span class="btn-icon">▶</span>
                 <span>DÉMARRER</span>
               </button>
             </div>
           </div>
-          
+
           <!-- Right Panel: How to play -->
           <div class="panel-card glass-panel" id="login-right-card">
             <h3 class="panel-title text-green">COMMENT JOUER</h3>
@@ -101,10 +107,11 @@
                     <span class="tutorial-badge" id="tutorial-badge">ÉTAPE 1</span>
                   </div>
                   <h4 id="tutorial-title">📞 PASSE UN COUP DE FIL !</h4>
-                  <p id="tutorial-desc">Lance un appel vocal avec tes potes (Discord, Zoom...) et partage-leur le code secret du salon !</p>
+                  <p id="tutorial-desc">Lance un appel vocal avec tes potes (Discord, Zoom...) et partage-leur le code
+                    secret du salon !</p>
                 </div>
               </div>
-              
+
               <div class="tutorial-controls">
                 <button class="nav-arrow" id="tut-prev">◀</button>
                 <div class="pagination-dots" id="tut-dots">
@@ -130,7 +137,7 @@
               <!-- Players list rendered dynamically -->
             </div>
           </div>
-          
+
           <!-- Right Panel: Lobby settings / code -->
           <div class="panel-card glass-panel">
             <h3 class="panel-title text-green">SALON DE JEU</h3>
@@ -142,8 +149,10 @@
               </div>
 
               <div class="lobby-info-text">
-                <p>Le jeu se déroule en <strong>3 manches</strong> de questions. Chaque joueur passera au rôle de Questionneur à son tour.</p>
-                <p class="warning-text">Le jeu démarrera automatiquement dès que tous les joueurs connectés cliqueront sur "PRÊT" !</p>
+                <p>Le jeu se déroule en <strong>3 manches</strong> de questions. Chaque joueur passera au rôle de
+                  Questionneur à son tour.</p>
+                <p class="warning-text">Le jeu démarrera automatiquement dès que tous les joueurs connectés cliqueront
+                  sur "PRÊT" !</p>
               </div>
 
               <button class="primary-btn ready-btn" id="readyBtn">
@@ -162,14 +171,15 @@
             <div id="picking-questioner-view" class="picking-role-view">
               <h3 class="panel-title">C'EST VOTRE TOUR DE CHOISIR !</h3>
               <div class="card-body">
-                <p class="instructions-text">Proposez une question pour que les autres joueurs essaient de deviner votre réponse. Vous pouvez écrire votre propre question ou en choisir une au hasard.</p>
-                
+                <p class="instructions-text">Proposez une question pour que les autres joueurs essaient de deviner votre
+                  réponse. Vous pouvez écrire votre propre question ou en choisir une au hasard.</p>
+
                 <div class="question-composer">
                   <div class="input-group">
                     <label for="question-input">VOTRE QUESTION</label>
                     <textarea id="question-input" rows="3" placeholder="Saisissez une question ici..."></textarea>
                   </div>
-                  
+
                   <div class="picker-actions">
                     <button class="secondary-btn" id="randomQuestionBtn">
                       <span class="btn-icon">🎲</span>
@@ -204,17 +214,20 @@
         <div class="one-panel-layout">
           <div class="panel-card glass-panel max-w-lg">
             <div class="panel-header-timer">
-              <div class="round-counter">Manche <span id="answering-round">1</span> / <span id="answering-max-rounds">3</span></div>
+              <div class="round-counter">Manche <span id="answering-round">1</span> / <span
+                  id="answering-max-rounds">3</span></div>
               <div class="timer-box" id="answering-timer">45</div>
             </div>
 
             <!-- Guesser answering view -->
             <div id="answering-guesser-view" class="answering-role-view">
-              <h3 class="panel-title text-blue">DEVINEZ LA RÉPONSE DE <span id="answering-questioner-name">AIRMAX90</span> !</h3>
+              <h3 class="panel-title text-blue">DEVINEZ LA RÉPONSE DE <span
+                  id="answering-questioner-name">AIRMAX90</span> !</h3>
               <div class="card-body">
                 <div class="question-display-box">
                   <span class="category-tag" id="answering-category">Food</span>
-                  <h2 class="question-text" id="answering-question-text">Quel est mon plat préféré quand je suis fatigué ?</h2>
+                  <h2 class="question-text" id="answering-question-text">Quel est mon plat préféré quand je suis fatigué
+                    ?</h2>
                 </div>
 
                 <div class="input-group mt-4">
@@ -236,7 +249,7 @@
                   <span class="category-tag" id="answering-q-category">Food</span>
                   <h2 class="question-text" id="answering-q-text">Quel est mon plat préféré quand je suis fatigué ?</h2>
                 </div>
-                
+
                 <div class="answering-status-list" id="answering-status-container">
                   <!-- List of players who have answered -->
                 </div>
@@ -251,11 +264,12 @@
         <div class="one-panel-layout">
           <div class="panel-card glass-panel max-w-lg">
             <h3 class="panel-title">RÉVÉLATION & JUGEMENT</h3>
-            
+
             <div class="card-body">
               <div class="question-display-box sm">
                 <h4 class="judged-q-header">Question posée par <span id="judging-questioner-name">AIRMAX90</span> :</h4>
-                <p class="question-text-sm" id="judging-question-text">Quel est mon plat préféré quand je suis fatigué ?</p>
+                <p class="question-text-sm" id="judging-question-text">Quel est mon plat préféré quand je suis fatigué ?
+                </p>
               </div>
 
               <!-- Answer Reveal Box (Theater effect) -->
@@ -285,7 +299,8 @@
               <div id="judging-guesser-controls" class="judging-role-controls">
                 <div class="waiting-animation mt-2">
                   <div class="bounce-avatar" id="judging-waiting-avatar"></div>
-                  <p class="pulse-text"><span id="judging-active-questioner">AIRMAX90</span> évalue les réponses (<span id="judging-progress">1</span> / <span id="judging-total-answers">3</span>)...</p>
+                  <p class="pulse-text"><span id="judging-active-questioner">AIRMAX90</span> évalue les réponses (<span
+                      id="judging-progress">1</span> / <span id="judging-total-answers">3</span>)...</p>
                 </div>
               </div>
             </div>
@@ -298,10 +313,10 @@
         <div class="one-panel-layout">
           <div class="panel-card glass-panel max-w-lg">
             <h3 class="panel-title text-green">TABLEAU DES RÉSULTATS (AFFINITÉS)</h3>
-            
+
             <div class="card-body results-body">
               <p class="results-intro">Voici qui vous connaît le mieux !</p>
-              
+
               <!-- Results leaderboard -->
               <div class="results-leaderboard" id="results-leaderboard-container">
                 <!-- Sorted list of scores with ranking styles -->
@@ -327,13 +342,14 @@
 
     <!-- Footer -->
     <footer class="game-footer">
-      <div class="footer-brand">Created by <a href="https://x.com/lumhaxdev" target="_blank" class="footer-author-link">Lumhax</a></div>
+      <div class="footer-brand">Created by <a href="https://x.com/lumhaxdev" target="_blank"
+          class="footer-author-link">Lumhax</a></div>
       <div class="footer-links">
-        <a href="#">CONDITIONS D'UTILISATION</a>
+        <a href="#" id="link-terms">CONDITIONS D'UTILISATION</a>
         <span class="separator">|</span>
-        <a href="#">CONFIDENTIALITÉ</a>
+        <a href="#" id="link-privacy">CONFIDENTIALITÉ</a>
         <span class="separator">|</span>
-        <a href="#">CONTACT</a>
+        <a href="#" id="link-contact">CONTACT</a>
       </div>
       <div class="footer-socials" style="position: relative;">
         <div class="volume-popup" id="volumePopup">
@@ -352,8 +368,19 @@
 
   </div>
 
+  <!-- Info Modal for Footer Links -->
+  <div class="info-modal" id="infoModal">
+    <div class="info-modal-content">
+      <button class="info-modal-close" id="infoModalCloseBtn">&times;</button>
+      <div class="info-modal-body" id="infoModalBody">
+        <!-- Content injected dynamically -->
+      </div>
+    </div>
+  </div>
+
   <!-- Socket.io client script loading -->
   <script src="/socket.io/socket.io.js"></script>
   <script src="client.js"></script>
 </body>
+
 </html>
