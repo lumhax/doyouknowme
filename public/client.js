@@ -467,6 +467,108 @@ function setupEventListeners() {
       }
     });
   }
+
+  // Settings Modal Logic
+  const settingsBtn = document.getElementById('settingsBtn');
+  const settingsModal = document.getElementById('settingsModal');
+  const settingsModalCloseBtn = document.getElementById('settingsModalCloseBtn');
+
+  if (settingsBtn && settingsModal) {
+    settingsBtn.addEventListener('click', () => {
+      const musicInput = document.getElementById('settingsMusicVolume');
+      const sfxInput = document.getElementById('settingsSfxVolume');
+      if (musicInput) musicInput.value = sounds.bgMusic.volume;
+      if (sfxInput) sfxInput.value = sfxVolume;
+      settingsModal.classList.add('active');
+    });
+  }
+
+  function closeSettingsModal() {
+    if (settingsModal) {
+      settingsModal.classList.remove('active');
+    }
+  }
+
+  if (settingsModalCloseBtn) {
+    settingsModalCloseBtn.addEventListener('click', closeSettingsModal);
+  }
+
+  if (settingsModal) {
+    settingsModal.addEventListener('click', (e) => {
+      if (e.target === settingsModal) {
+        closeSettingsModal();
+      }
+    });
+  }
+
+  // Bind settings music volume slider
+  const settingsMusicVolume = document.getElementById('settingsMusicVolume');
+  if (settingsMusicVolume) {
+    settingsMusicVolume.addEventListener('input', (e) => {
+      const val = parseFloat(e.target.value);
+      sounds.bgMusic.volume = val;
+      const oldSlider = document.getElementById('musicVolume');
+      if (oldSlider) oldSlider.value = val;
+    });
+  }
+
+  // Bind settings sfx volume slider
+  const settingsSfxVolume = document.getElementById('settingsSfxVolume');
+  if (settingsSfxVolume) {
+    settingsSfxVolume.addEventListener('input', (e) => {
+      const val = parseFloat(e.target.value);
+      sfxVolume = val;
+      const oldSlider = document.getElementById('sfxVolume');
+      if (oldSlider) oldSlider.value = val;
+    });
+  }
+
+  // Mobile settings legal links bindings
+  const termsMobile = document.getElementById('link-terms-mobile');
+  if (termsMobile) {
+    termsMobile.addEventListener('click', () => {
+      closeSettingsModal();
+      openInfoModal('terms');
+    });
+  }
+
+  const privacyMobile = document.getElementById('link-privacy-mobile');
+  if (privacyMobile) {
+    privacyMobile.addEventListener('click', () => {
+      closeSettingsModal();
+      openInfoModal('privacy');
+    });
+  }
+
+  const contactMobile = document.getElementById('link-contact-mobile');
+  if (contactMobile) {
+    contactMobile.addEventListener('click', () => {
+      closeSettingsModal();
+      openInfoModal('contact');
+    });
+  }
+
+  // Action Tab Selector Logic
+  const tabBtnCreate = document.getElementById('tabBtnCreate');
+  const tabBtnJoin = document.getElementById('tabBtnJoin');
+  const actionPathCreate = document.getElementById('action-path-create');
+  const actionPathJoin = document.getElementById('action-path-join');
+
+  if (tabBtnCreate && tabBtnJoin && actionPathCreate && actionPathJoin) {
+    tabBtnCreate.addEventListener('click', () => {
+      tabBtnCreate.classList.add('active');
+      tabBtnJoin.classList.remove('active');
+      actionPathCreate.style.display = 'block';
+      actionPathJoin.style.display = 'none';
+    });
+
+    tabBtnJoin.addEventListener('click', () => {
+      tabBtnJoin.classList.add('active');
+      tabBtnCreate.classList.remove('active');
+      actionPathCreate.style.display = 'none';
+      actionPathJoin.style.display = 'block';
+    });
+  }
 }
 
 // SOCKET MESSAGE HANDLING

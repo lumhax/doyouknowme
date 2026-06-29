@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Outfit:wght@100..900&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2.4">
+  <link rel="stylesheet" href="style.css?v=2.5">
 </head>
 
 <body>
@@ -42,7 +42,9 @@
       </div>
 
       <div class="header-right">
-        <!-- Layout symmetry placeholder -->
+        <button class="sound-toggle-btn" id="settingsBtn" title="Réglages">
+          <span class="sound-icon">⚙️</span>
+        </button>
       </div>
     </header>
 
@@ -76,21 +78,22 @@
                 <input type="text" id="nickname-input" placeholder="AIRMAX90" maxlength="15" autocomplete="off">
               </div>
 
-              <div class="action-paths" style="margin-top: 24px;">
+              <!-- Action Tabs Selector -->
+              <div class="action-tab-selector">
+                <button class="action-tab-btn active" id="tabBtnCreate">🎮 CRÉER</button>
+                <button class="action-tab-btn" id="tabBtnJoin">⚡ REJOINDRE</button>
+              </div>
+
+              <div class="action-paths" style="margin-top: 15px; width: 100%;">
                 <!-- Option 1: Create a brand new lobby -->
-                <div class="path-option">
-                  <button class="primary-btn w-full" id="createLobbyBtn">
+                <div class="path-option" id="action-path-create">
+                  <button class="primary-btn w-full" id="createLobbyBtn" style="margin-top: 0;">
                     <span>🎮 CRÉER UN SALON</span>
                   </button>
                 </div>
 
-                <div class="neo-divider">OU</div>
-
                 <!-- Option 2: Join existing lobby with a code -->
-                <div class="path-option">
-                  <label for="room-input"
-                    style="font-family: var(--font-display); font-size: 11px; font-weight: 900; color: var(--color-dark); text-transform: uppercase; display: block; margin-bottom: 8px;">REJOINDRE
-                    AVEC UN CODE</label>
+                <div class="path-option" id="action-path-join" style="display: none;">
                   <div class="join-input-wrapper">
                     <input type="text" id="room-input" placeholder="EX: XYZ123" maxlength="6"
                       style="text-transform: uppercase;">
@@ -377,6 +380,37 @@
 
   </div>
 
+  <!-- Settings Modal -->
+  <div class="info-modal" id="settingsModal">
+    <div class="info-modal-content">
+      <button class="info-modal-close" id="settingsModalCloseBtn">&times;</button>
+      <div class="info-modal-body">
+        <h3 class="panel-title text-green" style="margin: -22px -22px 15px -22px; border-bottom: 4px solid var(--color-dark); font-size: 18px; padding: 12px 20px; text-shadow: none;">⚙️ PARAMÈTRES</h3>
+        
+        <div class="volume-slider-group" style="margin-bottom: 12px; display: flex; flex-direction: column; gap: 4px;">
+          <label for="settingsMusicVolume" style="font-family: var(--font-display); font-size: 11px; font-weight: 900; color: var(--color-dark); text-transform: uppercase;">🎵 Musique</label>
+          <input type="range" id="settingsMusicVolume" min="0" max="1" step="0.05" value="0.3" style="-webkit-appearance: none; width: 100%; height: 8px; background: var(--neon-yellow); border: 2px solid var(--color-dark); border-radius: 4px; outline: none;">
+        </div>
+        <div class="volume-slider-group" style="margin-bottom: 18px; display: flex; flex-direction: column; gap: 4px;">
+          <label for="settingsSfxVolume" style="font-family: var(--font-display); font-size: 11px; font-weight: 900; color: var(--color-dark); text-transform: uppercase;">🔊 Effets</label>
+          <input type="range" id="settingsSfxVolume" min="0" max="1" step="0.05" value="0.7" style="-webkit-appearance: none; width: 100%; height: 8px; background: var(--neon-yellow); border: 2px solid var(--color-dark); border-radius: 4px; outline: none;">
+        </div>
+        
+        <div class="neo-divider">INFOS</div>
+        
+        <div class="settings-legal-links" style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+          <button class="secondary-btn w-full" id="link-terms-mobile">CONDITIONS D'UTILISATION</button>
+          <button class="secondary-btn w-full" id="link-privacy-mobile">CONFIDENTIALITÉ</button>
+          <button class="secondary-btn w-full" id="link-contact-mobile">CONTACT</button>
+        </div>
+        
+        <div class="settings-author" style="text-align: center; margin-top: 16px; font-family: var(--font-main); font-size: 11px; font-weight: 800; color: var(--color-muted);">
+          Created by <a href="https://x.com/lumhaxdev" target="_blank" style="color: var(--neon-magenta); text-decoration: underline;">Lumhax</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Info Modal for Footer Links -->
   <div class="info-modal" id="infoModal">
     <div class="info-modal-content">
@@ -389,7 +423,7 @@
 
   <!-- Socket.io client script loading -->
   <script src="/socket.io/socket.io.js"></script>
-  <script src="client.js"></script>
+  <script src="client.js?v=2.5"></script>
 </body>
 
 </html>

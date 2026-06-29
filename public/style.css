@@ -1577,23 +1577,7 @@ input[type="text"]:focus, textarea:focus {
   }
   
   .game-footer {
-    padding: 6px 0;
-    flex-direction: row !important;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .footer-brand {
-    font-size: 11px !important;
-  }
-  
-  .footer-links {
     display: none !important;
-  }
-  
-  .footer-socials {
-    margin-top: 0 !important;
   }
   
   .game-main-content {
@@ -1725,6 +1709,66 @@ input[type="text"]:focus, textarea:focus {
     gap: 8px !important;
   }
   
+  .lobby-info-text {
+    display: none !important;
+  }
+  
+  .lobby-controls {
+    gap: 8px !important;
+  }
+  
+  .lobby-code-box {
+    padding: 10px !important;
+    gap: 4px !important;
+    border-radius: 12px !important;
+    border-width: 2.5px dashed !important;
+  }
+  
+  .lobby-code-box h2 {
+    font-size: 24px !important;
+    letter-spacing: 2px !important;
+    margin: 2px 0 !important;
+  }
+  
+  .lobby-code-box span {
+    font-size: 9px !important;
+  }
+  
+  .answering-status-list {
+    flex-direction: row !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    margin-top: 15px !important;
+  }
+  
+  .status-item {
+    flex-direction: column !important;
+    gap: 4px !important;
+    padding: 8px !important;
+    border-radius: 12px !important;
+    width: 75px !important;
+    height: 70px !important;
+    justify-content: center !important;
+    box-shadow: 2px 2px 0 var(--color-dark) !important;
+    border-width: 2.5px !important;
+  }
+
+  .status-item .player-name {
+    font-size: 9px !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    width: 100% !important;
+  }
+  
+  .status-badge {
+    font-size: 8px !important;
+    padding: 2px 6px !important;
+    border-radius: 6px !important;
+  }
+
   .timer-box {
     font-size: 16px !important;
     width: 36px !important;
@@ -1737,6 +1781,27 @@ input[type="text"]:focus, textarea:focus {
     padding: 8px !important;
     border-width: 2.5px !important;
     border-radius: 10px !important;
+  }
+  
+  .instructions-text {
+    display: none !important;
+  }
+  
+  .question-composer {
+    padding: 12px !important;
+    margin-top: 10px !important;
+    border-width: 3px !important;
+    box-shadow: 4px 4px 0 var(--color-dark) !important;
+    gap: 12px !important;
+  }
+  
+  .picker-actions {
+    align-items: center !important;
+  }
+  
+  .category-badge {
+    padding: 6px 12px !important;
+    font-size: 11px !important;
   }
   
   .question-display-box .question-text {
@@ -1754,23 +1819,45 @@ input[type="text"]:focus, textarea:focus {
   }
   
   .answer-reveal-theater {
-    padding: 12px !important;
-    border-width: 2.5px !important;
+    padding: 10px !important;
+    margin: 15px 0 !important;
   }
   
   .reveal-bubble {
-    font-size: 14px !important;
+    font-size: 18px !important;
+    padding: 16px !important;
+    border-width: 3.5px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 5px 0 var(--color-dark) !important;
   }
   
   .judging-buttons {
-    gap: 8px !important;
+    gap: 12px !important;
   }
   
   .judge-btn {
-    font-size: 12px !important;
-    padding: 6px 10px !important;
-    border-width: 2px !important;
-    border-radius: 10px !important;
+    font-size: 14px !important;
+    padding: 12px !important;
+    border-width: 3px !important;
+    border-radius: 12px !important;
+  }
+  
+  .invalid-btn {
+    box-shadow: 0 4px 0 #b33939, 0 4px 6px rgba(0,0,0,0.15) !important;
+  }
+  
+  .invalid-btn:active {
+    transform: translateY(4px) !important;
+    box-shadow: none !important;
+  }
+  
+  .valid-btn {
+    box-shadow: 0 4px 0 #00994f, 0 4px 6px rgba(0,0,0,0.15) !important;
+  }
+  
+  .valid-btn:active {
+    transform: translateY(4px) !important;
+    box-shadow: none !important;
   }
   
   .results-leaderboard {
@@ -2166,4 +2253,38 @@ input[type="text"]:focus, textarea:focus {
     margin-top: 8px !important;
     gap: 8px !important;
   }
+}
+
+/* Action Tab Selector */
+.action-tab-selector {
+  display: flex;
+  width: 100%;
+  border: 3.5px solid var(--color-dark);
+  border-radius: 14px;
+  background: var(--color-dark);
+  overflow: hidden;
+  box-shadow: 4px 4px 0 var(--color-dark);
+}
+
+.action-tab-btn {
+  flex: 1;
+  background: #ffffff;
+  border: none;
+  color: var(--color-dark);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 13px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-transform: uppercase;
+}
+
+.action-tab-btn:first-child {
+  border-right: 3.5px solid var(--color-dark);
+}
+
+.action-tab-btn.active {
+  background: var(--neon-cyan);
+  color: var(--color-dark);
 }
