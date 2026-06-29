@@ -1,5 +1,19 @@
 // Socket initialization
-const socket = io();
+const socket = io({
+  transports: ['polling', 'websocket']
+});
+
+socket.on('connect', () => {
+  console.log("Connecté au serveur Socket.io avec l'ID:", socket.id);
+});
+
+socket.on('disconnect', (reason) => {
+  console.warn("Déconnecté du serveur:", reason);
+});
+
+socket.on('connect_error', (err) => {
+  console.error("Erreur de connexion Socket.io:", err);
+});
 
 // State variables
 let currentLobbyState = null;

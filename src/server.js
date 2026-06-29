@@ -183,6 +183,13 @@ io.on('connection', (socket) => {
 
     const room = rooms[targetLobbyId];
 
+    // Cancel deletion timeout if active
+    if (room.cleanupTimeout) {
+      clearTimeout(room.cleanupTimeout);
+      room.cleanupTimeout = null;
+      console.log(`[Socket] Room ${targetLobbyId} cleanup cancelled (player joined).`);
+    }
+
     // Avoid duplicate usernames inside the same lobby
     const finalUsername = room.players.some(p => p.username === username)
       ? `${username}#${Math.floor(Math.random() * 900) + 100}`
@@ -391,11 +398,17 @@ io.on('connection', (socket) => {
         console.log(`[Socket] Player ${removedPlayer.username} left room ${lobbyId}`);
       }
 
-      // Clean up room if empty
+      // Clean up room if empty (with a grace period to handle transient disconnects)
       if (room.players.length === 0) {
         clearInterval(room.timerInterval);
-        delete rooms[lobbyId];
-        console.log(`[Socket] Room ${lobbyId} is empty. Deleted.`);
+        if (room.cleanupTimeout) clearTimeout(room.cleanupTimeout);
+        
+        room.cleanupTimeout = setTimeout(() => {
+          if (rooms[lobbyId] && rooms[lobbyId].players.length === 0) {
+            delete rooms[lobbyId];
+            console.log(`[Socket] Room ${lobbyId} is empty. Deleted after grace period.`);
+          }
+        }, 15000); // 15 seconds grace period
       } else {
         // If current questioner disconnected, adjust index or proceed
         if (room.currentQuestionerIndex >= room.players.length) {
