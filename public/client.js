@@ -778,3 +778,17 @@ const modalContent = {
     </p>
   `
 };
+
+// Resume background music when tab becomes active again (fixes browser suspension)
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    const container = document.querySelector('.game-container');
+    // If the game has started (splash screen passed) and music is not set to 0 volume
+    if (container && container.classList.contains('started') && sounds.bgMusic.volume > 0) {
+      // Only play if we are not on the RESULTS screen (where victory SFX plays instead)
+      if (sounds.bgMusic.paused && (!currentLobbyState || currentLobbyState.gameState !== 'RESULTS')) {
+        sounds.bgMusic.play().catch(err => console.warn("Failed to resume background music on tab focus:", err));
+      }
+    }
+  }
+});
