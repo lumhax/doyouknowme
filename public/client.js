@@ -17,6 +17,10 @@ const sounds = {
 
 sounds.bgMusic.loop = true;
 sounds.bgMusic.volume = 0.3; // Default 30% volume
+sounds.bgMusic.addEventListener('ended', function() {
+  this.currentTime = 0;
+  this.play().catch(e => console.warn("Loop playback failed:", e));
+}, false);
 
 let sfxVolume = 0.7;
 
@@ -220,10 +224,10 @@ function setupEventListeners() {
       // Play splash 1 (rotation) immediately
       playSound('splash1');
       
-      // Play splash 2 (slide up) at 990ms (45% of 2.2s animation time)
+      // Play splash 2 (slide up) at 1320ms (60% of 2.2s animation time, start of slide-up)
       setTimeout(() => {
         playSound('splash2');
-      }, 990);
+      }, 1320);
       
       // Play background music loop
       sounds.bgMusic.play().catch(err => console.warn("Music play blocked:", err));
