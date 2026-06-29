@@ -2047,63 +2047,89 @@ input[type="text"]:focus, textarea:focus {
 /* Vertical media query for small heights (e.g., 1080p desktop browser windows, small laptops) */
 @media (max-height: 880px) {
   .logo-img {
-    height: 52px !important;
+    height: 48px !important;
   }
   .logo-sub {
-    font-size: 10px !important;
-    letter-spacing: 2px !important;
+    font-size: 9px !important;
+    letter-spacing: 1.5px !important;
   }
   .game-header {
-    padding: 12px 0 !important;
-    margin-bottom: 6px !important;
+    padding: 8px 0 !important;
+    margin-bottom: 4px !important;
+  }
+  .character-creator {
+    gap: 10px !important;
   }
   .avatar-preview-container {
-    width: 120px !important;
-    height: 120px !important;
+    width: 90px !important;
+    height: 90px !important;
+    border-width: 3.5px !important;
+    box-shadow: 4px 4px 0 var(--color-dark) !important;
   }
   .avatar-preview-container svg, .avatar-preview-container img {
-    width: 95px !important;
-    height: 95px !important;
+    width: 70px !important;
+    height: 70px !important;
   }
   .random-avatar-btn {
-    width: 42px !important;
-    height: 42px !important;
+    width: 34px !important;
+    height: 34px !important;
+    border-width: 2.5px !important;
+    bottom: -2px !important;
+    right: -2px !important;
+    box-shadow: 2px 2px 0 var(--color-dark) !important;
+  }
+  .random-avatar-btn svg {
+    width: 16px !important;
+    height: 16px !important;
   }
   .panel-card {
     box-shadow: 8px 8px 0 var(--color-dark) !important;
-    border-radius: 24px !important;
+    border-radius: 20px !important;
   }
   .panel-title {
-    font-size: 18px !important;
-    padding: 10px 18px !important;
+    font-size: 16px !important;
+    padding: 8px 16px !important;
     border-bottom-width: 4px !important;
   }
   .card-body {
-    padding: 16px !important;
+    padding: 12px 16px !important;
   }
-  .primary-btn {
-    font-size: 16px !important;
-    padding: 10px 20px !important;
-    box-shadow: 0 6px 0 var(--color-dark) !important;
-    border-width: 4px !important;
-    border-radius: 14px !important;
-    margin-top: 8px !important;
+  .input-group {
+    gap: 4px !important;
   }
-  .primary-btn:active {
-    transform: translateY(6px) !important;
-    box-shadow: 0 1px 0 var(--color-dark) !important;
+  label {
+    font-size: 10px !important;
   }
-  .secondary-btn {
-    font-size: 13px !important;
-    padding: 8px 16px !important;
+  input[type="text"], textarea {
+    padding: 8px 12px !important;
+    font-size: 14px !important;
     border-width: 3px !important;
     border-radius: 12px !important;
   }
+  .primary-btn {
+    font-size: 14px !important;
+    padding: 8px 16px !important;
+    box-shadow: 0 4px 0 var(--color-dark) !important;
+    border-width: 3px !important;
+    border-radius: 12px !important;
+    margin-top: 4px !important;
+  }
+  .primary-btn:active {
+    transform: translateY(4px) !important;
+    box-shadow: 0 1px 0 var(--color-dark) !important;
+  }
+  .secondary-btn {
+    font-size: 12px !important;
+    padding: 6px 12px !important;
+    border-width: 2.5px !important;
+    border-radius: 10px !important;
+    box-shadow: 2px 2px 0 var(--color-dark) !important;
+  }
   .neo-divider {
-    margin: 12px 0 !important;
+    margin: 8px 0 !important;
   }
   .action-paths {
-    margin-top: 12px !important;
-    gap: 12px !important;
+    margin-top: 8px !important;
+    gap: 8px !important;
   }
 }
