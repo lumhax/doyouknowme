@@ -13,7 +13,13 @@
 <body>
   <!-- Outer Wrapper containing background effects -->
   <div class="game-container">
-    <div id="splash-overlay"></div>
+    <div id="splash-overlay">
+      <div class="splash-welcome-box">
+        <button id="splashStartBtn" class="primary-btn splash-btn">
+          <span>🔊 DÉMARRER AVEC SON</span>
+        </button>
+      </div>
+    </div>
     
     <!-- Header -->
     <header class="game-header">
@@ -28,11 +34,13 @@
       
       <div class="header-logo">
         <img src="logo.png" alt="DoYouKnowMe?" class="logo-img">
-        <div class="logo-sub">JEU SOCIAL DE COMPLICITÉ</div>
+        <div class="logo-sub">VOYONS QUI SONT TES VRAIS POTES !</div>
       </div>
       
       <div class="header-right">
-        <!-- Element left empty to maintain layout symmetry -->
+        <button class="sound-toggle-btn" id="volumeBtn" title="Activer/Couper le son">
+          <span class="sound-icon">🔊</span>
+        </button>
       </div>
     </header>
 
@@ -319,23 +327,26 @@
 
     <!-- Footer -->
     <footer class="game-footer">
-      <div class="footer-brand">DoYouKnowMe</div>
+      <div class="footer-brand">Created by <a href="https://x.com/lumhaxdev" target="_blank" class="footer-author-link">Lumhax</a></div>
       <div class="footer-links">
         <a href="#">CONDITIONS D'UTILISATION</a>
         <span class="separator">|</span>
         <a href="#">CONFIDENTIALITÉ</a>
         <span class="separator">|</span>
-        <a href="#">RESSOURCES</a>
-        <span class="separator">|</span>
-        <a href="#">BLOG</a>
-        <span class="separator">|</span>
         <a href="#">CONTACT</a>
       </div>
-      <div class="footer-socials">
-        <span class="social-icon">🎵</span>
-        <span class="social-icon">📺</span>
-        <span class="social-icon">💬</span>
-        <span class="social-icon">📸</span>
+      <div class="footer-socials" style="position: relative;">
+        <div class="volume-popup" id="volumePopup">
+          <div class="volume-slider-group">
+            <label for="musicVolume">🎵 Musique</label>
+            <input type="range" id="musicVolume" min="0" max="1" step="0.05" value="0.3">
+          </div>
+          <div class="volume-slider-group">
+            <label for="sfxVolume">🔊 Effets</label>
+            <input type="range" id="sfxVolume" min="0" max="1" step="0.05" value="0.7">
+          </div>
+        </div>
+        <button class="social-icon volume-pop-btn" id="volumePopBtn" title="Réglages du son">🎵</button>
       </div>
     </footer>
 

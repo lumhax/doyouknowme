@@ -3,12 +3,86 @@ const socket = io({
   transports: ['polling', 'websocket']
 });
 
+// Sound system definitions
+const sounds = {
+  bgMusic: new Audio('sounds/bg_music.mp3'),
+  click: new Audio('sounds/click.mp3'),
+  correct: new Audio('sounds/correct.mp3'),
+  incorrect: new Audio('sounds/incorrect.mp3'),
+  splash1: new Audio('sounds/splash1.mp3'),
+  splash2: new Audio('sounds/splash2.mp3'),
+  timerTick: new Audio('sounds/timer_tick.mp3'),
+  victory: new Audio('sounds/victory.mp3')
+};
+
+sounds.bgMusic.loop = true;
+sounds.bgMusic.volume = 0.3; // Default 30% volume
+
+let sfxVolume = 0.7;
+
+function playSound(key) {
+  const audio = sounds[key];
+  if (audio) {
+    audio.volume = sfxVolume;
+    audio.currentTime = 0;
+    audio.play().catch(e => console.warn(`Audio play blocked for ${key}:`, e));
+  }
+}
+
+function handleStateSounds(newState) {
+  if (!currentLobbyState) return;
+  const oldState = currentLobbyState;
+  
+  // 1. Transition to RESULTS
+  if (newState.gameState === 'RESULTS' && oldState.gameState !== 'RESULTS') {
+    sounds.bgMusic.pause();
+    playSound('victory');
+    return;
+  }
+  
+  // Resume background music if leaving RESULTS
+  if (newState.gameState !== 'RESULTS' && oldState.gameState === 'RESULTS') {
+    sounds.bgMusic.play().catch(e => {});
+  }
+  
+  // 2. Answering timer tick (last 10 seconds)
+  if (newState.gameState === 'ANSWERING') {
+    if (newState.timer <= 10 && newState.timer > 0) {
+      if (oldState.gameState !== 'ANSWERING' || oldState.timer !== newState.timer) {
+        playSound('timerTick');
+      }
+    }
+  }
+  
+  // 3. Judgment sounds (correct / incorrect)
+  if (newState.gameState === 'JUDGING') {
+    const oldAnswers = oldState.currentAnswers || [];
+    const newAnswers = newState.currentAnswers || [];
+    
+    for (let i = 0; i < oldAnswers.length; i++) {
+      const oldAns = oldAnswers[i];
+      const newAns = newAnswers[i];
+      if (newAns && oldAns.isValid === null && newAns.isValid !== null) {
+        if (newAns.isValid === true) {
+          playSound('correct');
+        } else {
+          playSound('incorrect');
+        }
+        break;
+      }
+    }
+  }
+}
+
 socket.on('connect', () => {
   console.log("Connecté au serveur Socket.io avec l'ID:", socket.id);
 });
 
 socket.on('disconnect', (reason) => {
   console.warn("Déconnecté du serveur:", reason);
+  // Stop background music and tick sounds on disconnect
+  sounds.bgMusic.pause();
+  sounds.timerTick.pause();
 });
 
 socket.on('connect_error', (err) => {
@@ -136,6 +210,73 @@ function switchScreen(screenId) {
 
 // EVENT LISTENERS SETUP
 function setupEventListeners() {
+  // Splash Start Button (Triggers rotation sound, schedules slide up sound, and starts background music)
+  const splashStartBtn = document.getElementById('splashStartBtn');
+  if (splashStartBtn) {
+    splashStartBtn.addEventListener('click', () => {
+      // Add .started to trigger CSS animations
+      document.querySelector('.game-container').classList.add('started');
+      
+      // Play splash 1 (rotation) immediately
+      playSound('splash1');
+      
+      // Play splash 2 (slide up) at 990ms (45% of 2.2s animation time)
+      setTimeout(() => {
+        playSound('splash2');
+      }, 990);
+      
+      // Play background music loop
+      sounds.bgMusic.play().catch(err => console.warn("Music play blocked:", err));
+    });
+  }
+
+  // Volume Popup Toggler and Sliders
+  const volumePopBtn = document.getElementById('volumePopBtn');
+  const volumePopup = document.getElementById('volumePopup');
+  if (volumePopBtn && volumePopup) {
+    volumePopBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      volumePopup.classList.toggle('active');
+    });
+
+    // Prevent clicks inside popup from closing it
+    volumePopup.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Close volume popup when clicking anywhere else
+    document.addEventListener('click', () => {
+      volumePopup.classList.remove('active');
+    });
+
+    // Music Volume slider
+    const musicVolumeSlider = document.getElementById('musicVolume');
+    if (musicVolumeSlider) {
+      musicVolumeSlider.addEventListener('input', (e) => {
+        const val = parseFloat(e.target.value);
+        sounds.bgMusic.volume = val;
+      });
+    }
+
+    // SFX Volume slider
+    const sfxVolumeSlider = document.getElementById('sfxVolume');
+    if (sfxVolumeSlider) {
+      sfxVolumeSlider.addEventListener('input', (e) => {
+        const val = parseFloat(e.target.value);
+        sfxVolume = val;
+      });
+    }
+  }
+
+  // Generic Button Click SFX listener
+  document.addEventListener('click', (e) => {
+    const target = e.target.closest('button, .lang-btn, .nav-arrow, .tab-btn, .random-avatar-btn, .judge-btn');
+    // Don't play click sound on the splash start button itself since it plays splash1
+    if (target && target.id !== 'splashStartBtn') {
+      playSound('click');
+    }
+  });
+
   // Avatar Randomizer
   document.getElementById('randomizeAvatarBtn').addEventListener('click', () => {
     currentAvatarIndex = (currentAvatarIndex + 1) % avatars.length;
@@ -253,6 +394,7 @@ function setupEventListeners() {
 
 // SOCKET MESSAGE HANDLING
 socket.on('room-state', (roomState) => {
+  handleStateSounds(roomState);
   currentLobbyState = roomState;
   
   // Transition screens based on state
