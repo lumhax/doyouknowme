@@ -1524,7 +1524,7 @@ input[type="text"]:focus, textarea:focus {
   .two-panel-layout {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
     width: 100%;
     flex: 1;
     min-height: 0;
@@ -1534,39 +1534,41 @@ input[type="text"]:focus, textarea:focus {
     display: none !important;
   }
   
+  #login-left-card .card-header-simple {
+    display: none !important;
+  }
+  
   .game-header {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 8px 0;
-    margin-bottom: 4px;
+    padding: 4px 0;
+    margin-bottom: 2px;
   }
   
   .logo-img {
-    height: 44px !important;
+    height: 32px !important;
   }
   
   .logo-sub {
-    font-size: 8px !important;
-    letter-spacing: 1px !important;
-    margin-top: 2px !important;
+    display: none !important;
   }
   
   .header-left {
-    top: 10px;
-    left: 10px;
+    top: 6px;
+    left: 6px;
   }
   
   .lang-btn {
-    padding: 6px 12px;
-    font-size: 11px;
-    border-width: 2.5px;
+    padding: 4px 10px;
+    font-size: 10px;
+    border-width: 2px;
     box-shadow: 2px 2px 0 var(--color-dark);
   }
   
   .lang-btn svg {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
   }
   
   .game-footer {
@@ -1598,187 +1600,208 @@ input[type="text"]:focus, textarea:focus {
   }
   
   .panel-card {
-    border-width: 4px !important;
-    box-shadow: 6px 6px 0 var(--color-dark) !important;
-    border-radius: 20px !important;
-    max-height: calc(100dvh - 120px);
+    border-width: 3.5px !important;
+    box-shadow: 5px 5px 0 var(--color-dark) !important;
+    border-radius: 16px !important;
+    max-height: calc(100dvh - 100px);
   }
   
   .panel-title {
-    font-size: 16px !important;
-    padding: 10px 16px !important;
-    border-bottom-width: 4px !important;
+    font-size: 14px !important;
+    padding: 8px 14px !important;
+    border-bottom-width: 3.5px !important;
   }
   
   .card-body {
-    padding: 12px !important;
+    padding: 10px 12px !important;
     overflow-y: auto;
   }
   
+  .character-creator {
+    gap: 8px !important;
+  }
+  
   input[type="text"], textarea {
-    padding: 10px 14px !important;
-    font-size: 14px !important;
-    border-width: 3px !important;
-    border-radius: 12px !important;
+    padding: 6px 12px !important;
+    font-size: 13px !important;
+    border-width: 2.5px !important;
+    border-radius: 10px !important;
   }
   
   label {
-    font-size: 10px !important;
+    font-size: 9px !important;
+    margin-bottom: 2px !important;
   }
   
   .primary-btn {
-    font-size: 15px !important;
-    padding: 10px 18px !important;
-    box-shadow: 0 5px 0 var(--color-dark) !important;
-    border-width: 4px !important;
-    border-radius: 14px !important;
-    margin-top: 8px !important;
+    font-size: 13px !important;
+    padding: 8px 14px !important;
+    box-shadow: 0 3px 0 var(--color-dark) !important;
+    border-width: 2.5px !important;
+    border-radius: 10px !important;
+    margin-top: 2px !important;
   }
   
   .primary-btn:hover {
     transform: none !important;
-    box-shadow: 0 5px 0 var(--color-dark) !important;
+    box-shadow: 0 3px 0 var(--color-dark) !important;
   }
   
   .primary-btn:active {
-    transform: translateY(4px) !important;
+    transform: translateY(3px) !important;
     box-shadow: 0 1px 0 var(--color-dark) !important;
   }
   
   .secondary-btn {
-    font-size: 13px !important;
-    padding: 8px 16px !important;
-    border-width: 3px !important;
-    border-radius: 12px !important;
-    box-shadow: 3px 3px 0 var(--color-dark) !important;
+    font-size: 11px !important;
+    padding: 6px 12px !important;
+    border-width: 2px !important;
+    border-radius: 8px !important;
+    box-shadow: 2px 2px 0 var(--color-dark) !important;
   }
   
   .secondary-btn:active {
-    transform: translateY(3px) !important;
+    transform: translateY(2px) !important;
     box-shadow: 0 0 0 var(--color-dark) !important;
   }
   
   .avatar-preview-container {
-    width: 100px !important;
-    height: 100px !important;
-    border-width: 4px !important;
-    box-shadow: 4px 4px 0 var(--color-dark) !important;
-  }
-  
-  .avatar-preview-container svg, .avatar-preview-container img {
     width: 80px !important;
     height: 80px !important;
-  }
-  
-  .random-avatar-btn {
-    width: 36px !important;
-    height: 36px !important;
-    border-width: 3px !important;
-    bottom: -2px !important;
-    right: -2px !important;
-    box-shadow: 2px 2px 0 var(--color-dark) !important;
-  }
-  
-  .random-avatar-btn svg {
-    width: 18px !important;
-    height: 18px !important;
-  }
-  
-  .player-row {
-    padding: 8px 12px !important;
-    font-size: 13px !important;
-  }
-  
-  .player-avatar {
-    width: 28px !important;
-    height: 28px !important;
-  }
-  
-  .players-list-body {
-    max-height: 120px !important;
-    overflow-y: auto !important;
-  }
-  
-  .timer-box {
-    font-size: 20px !important;
-    width: 44px !important;
-    height: 44px !important;
     border-width: 3px !important;
     box-shadow: 3px 3px 0 var(--color-dark) !important;
   }
   
+  .avatar-preview-container svg, .avatar-preview-container img {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  
+  .random-avatar-btn {
+    width: 28px !important;
+    height: 28px !important;
+    border-width: 2px !important;
+    bottom: -2px !important;
+    right: -2px !important;
+    box-shadow: 1.5px 1.5px 0 var(--color-dark) !important;
+  }
+  
+  .random-avatar-btn svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  .neo-divider {
+    margin: 6px 0 !important;
+    font-size: 10px !important;
+  }
+  
+  .action-paths {
+    margin-top: 4px !important;
+    gap: 6px !important;
+  }
+  
+  .player-row {
+    padding: 6px 10px !important;
+    font-size: 12px !important;
+    border-width: 2.5px !important;
+    border-radius: 12px !important;
+    box-shadow: 3px 3px 0 var(--color-dark) !important;
+  }
+  
+  .player-avatar {
+    width: 24px !important;
+    height: 24px !important;
+  }
+  
+  .players-list-body {
+    max-height: 110px !important;
+    overflow-y: auto !important;
+    gap: 8px !important;
+  }
+  
+  .timer-box {
+    font-size: 16px !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-width: 2px !important;
+    box-shadow: 2px 2px 0 var(--color-dark) !important;
+  }
+  
   .question-display-box {
-    padding: 12px !important;
-    border-width: 3px !important;
-    border-radius: 14px !important;
+    padding: 8px !important;
+    border-width: 2.5px !important;
+    border-radius: 10px !important;
   }
   
   .question-display-box .question-text {
-    font-size: 16px !important;
+    font-size: 14px !important;
   }
   
   .answering-status-list {
-    max-height: 140px !important;
-    overflow-y: auto !important;
-  }
-  
-  .status-item {
-    padding: 6px 10px !important;
-  }
-  
-  .answer-reveal-theater {
-    padding: 16px !important;
-    border-width: 3px !important;
-  }
-  
-  .reveal-bubble {
-    font-size: 16px !important;
-  }
-  
-  .judging-buttons {
-    gap: 10px !important;
-  }
-  
-  .judge-btn {
-    font-size: 13px !important;
-    padding: 8px 12px !important;
-    border-width: 3px !important;
-  }
-  
-  .results-leaderboard {
     max-height: 120px !important;
     overflow-y: auto !important;
   }
   
-  .result-row {
-    padding: 6px 12px !important;
+  .status-item {
+    padding: 5px 8px !important;
     font-size: 12px !important;
   }
   
+  .answer-reveal-theater {
+    padding: 12px !important;
+    border-width: 2.5px !important;
+  }
+  
+  .reveal-bubble {
+    font-size: 14px !important;
+  }
+  
+  .judging-buttons {
+    gap: 8px !important;
+  }
+  
+  .judge-btn {
+    font-size: 12px !important;
+    padding: 6px 10px !important;
+    border-width: 2px !important;
+    border-radius: 10px !important;
+  }
+  
+  .results-leaderboard {
+    max-height: 110px !important;
+    overflow-y: auto !important;
+  }
+  
+  .result-row {
+    padding: 5px 10px !important;
+    font-size: 11px !important;
+  }
+  
   .affinities-section {
-    margin-top: 10px !important;
+    margin-top: 6px !important;
   }
   
   .affinity-card {
-    padding: 8px !important;
-    gap: 6px !important;
+    padding: 6px !important;
+    gap: 4px !important;
   }
   
   .bubble-node span {
-    font-size: 10px !important;
+    font-size: 8px !important;
   }
   
   .connector-line {
-    height: 2px !important;
+    height: 1.5px !important;
   }
   
   .affinity-badge {
-    font-size: 8px !important;
-    padding: 2px 4px !important;
+    font-size: 7px !important;
+    padding: 1px 3px !important;
   }
   
   .affinity-label {
-    font-size: 9px !important;
+    font-size: 8px !important;
   }
 }
 
