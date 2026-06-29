@@ -298,18 +298,37 @@ function setupEventListeners() {
     renderTutorialSlide();
   });
 
-  // Login Start Button
-  document.getElementById('startGameBtn').addEventListener('click', () => {
-    const nicknameInput = document.getElementById('nickname-input');
-    const roomInput = document.getElementById('room-input');
-    
-    const username = nicknameInput.value.trim() || 'Anonyme';
-    const lobbyId = roomInput.value.trim().toUpperCase();
-    const avatar = avatars[currentAvatarIndex].key;
-    
-    // Join lobby room
-    socket.emit('join-room', { username, avatar, lobbyId });
-  });
+  // Create Lobby Button
+  const createLobbyBtn = document.getElementById('createLobbyBtn');
+  if (createLobbyBtn) {
+    createLobbyBtn.addEventListener('click', () => {
+      const nicknameInput = document.getElementById('nickname-input');
+      const username = nicknameInput.value.trim() || 'Anonyme';
+      const avatar = avatars[currentAvatarIndex].key;
+      // Emit join-room with empty lobbyId to create a new room
+      socket.emit('join-room', { username, avatar, lobbyId: "" });
+    });
+  }
+
+  // Join Lobby Button
+  const joinLobbyBtn = document.getElementById('joinLobbyBtn');
+  if (joinLobbyBtn) {
+    joinLobbyBtn.addEventListener('click', () => {
+      const nicknameInput = document.getElementById('nickname-input');
+      const roomInput = document.getElementById('room-input');
+      
+      const username = nicknameInput.value.trim() || 'Anonyme';
+      const lobbyId = roomInput.value.trim().toUpperCase();
+      const avatar = avatars[currentAvatarIndex].key;
+      
+      if (!lobbyId) {
+        alert("Veuillez saisir un code de salon !");
+        return;
+      }
+      
+      socket.emit('join-room', { username, avatar, lobbyId });
+    });
+  }
 
   // Copy Lobby Code Link
   document.getElementById('copyCodeBtn').addEventListener('click', () => {

@@ -56,11 +56,10 @@
         <div class="two-panel-layout">
           <!-- Left Panel: Create Player -->
           <div class="panel-card glass-panel" id="login-left-card">
-            <div class="card-tabs">
-              <button class="tab-btn active">ANONYME</button>
-              <button class="tab-btn disabled" disabled>AUTHENTIFICATION</button>
+            <div class="card-header-simple">
+              <h3>🎮 REJOINDRE OU CRÉER</h3>
             </div>
-
+            
             <div class="card-body character-creator">
               <div class="avatar-selector">
                 <div class="avatar-preview-container" id="avatar-preview-box">
@@ -74,23 +73,32 @@
                 </button>
               </div>
 
-
-
               <div class="input-group">
                 <label for="nickname-input">CHOISIS UN PERSONNAGE ET UN SURNOM</label>
                 <input type="text" id="nickname-input" placeholder="AIRMAX90" maxlength="15" autocomplete="off">
               </div>
 
-              <div class="lobby-code-group">
-                <label for="room-input">CODE DE SALON (OPTIONNEL)</label>
-                <input type="text" id="room-input" placeholder="EX: XYZ123" maxlength="6"
-                  style="text-transform: uppercase;">
-              </div>
+              <div class="neo-divider">OU</div>
 
-              <button class="primary-btn" id="startGameBtn">
-                <span class="btn-icon">▶</span>
-                <span>DÉMARRER</span>
-              </button>
+              <div class="action-paths">
+                <!-- Option 1: Create a brand new lobby -->
+                <div class="path-option">
+                  <button class="primary-btn w-full" id="createLobbyBtn">
+                    <span>🎮 CRÉER UN SALON</span>
+                  </button>
+                </div>
+                
+                <!-- Option 2: Join existing lobby with a code -->
+                <div class="path-option">
+                  <label for="room-input" style="font-family: var(--font-display); font-size: 11px; font-weight: 900; color: var(--color-dark); text-transform: uppercase; display: block; margin-bottom: 8px;">REJOINDRE AVEC UN CODE</label>
+                  <div class="join-input-wrapper">
+                    <input type="text" id="room-input" placeholder="EX: XYZ123" maxlength="6" style="text-transform: uppercase;">
+                    <button class="secondary-btn" id="joinLobbyBtn">
+                      <span>REJOINDRE ⚡</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 

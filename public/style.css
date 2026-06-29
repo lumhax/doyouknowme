@@ -1706,3 +1706,69 @@ input[type="text"]:focus, textarea:focus {
 .info-modal-body a:hover {
   color: var(--neon-cyan);
 }
+
+/* Simple card header */
+.card-header-simple {
+  border-bottom: 3px solid var(--color-dark);
+  padding: 16px 20px;
+  background: var(--neon-cyan);
+}
+
+.card-header-simple h3 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 16px;
+  margin: 0;
+  color: var(--color-dark);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Neo Divider */
+.neo-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 13px;
+  color: var(--color-dark);
+  margin: 20px 0;
+  text-transform: uppercase;
+}
+
+.neo-divider::before,
+.neo-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 2.5px dashed var(--color-dark);
+}
+
+.neo-divider::before {
+  margin-right: 15px;
+}
+
+.neo-divider::after {
+  margin-left: 15px;
+}
+
+/* Action Paths */
+.action-paths {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.join-input-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.join-input-wrapper input {
+  flex: 1;
+  margin-bottom: 0 !important; /* Override standard input margin */
+}
+
+.join-input-wrapper button {
+  white-space: nowrap;
+}
