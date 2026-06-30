@@ -10,7 +10,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Outfit:wght@100..900&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=3.1">
+  <link rel="stylesheet" href="style.css?v=3.5">
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark-theme');
+      }
+    })();
+  </script>
 </head>
 
 <body>
@@ -384,7 +392,8 @@
             <input type="range" id="sfxVolume" min="0" max="1" step="0.05" value="0.7">
           </div>
         </div>
-        <button class="social-icon volume-pop-btn" id="volumePopBtn" title="Réglages du son" data-i18n="volumePopBtn">🎵</button>
+        <button class="volume-pop-btn theme-toggle-btn" id="themeToggleBtn" title="Mode sombre / clair">🌙</button>
+        <button class="volume-pop-btn" id="volumePopBtn" title="Réglages du son" data-i18n="volumePopBtn">🎵</button>
       </div>
     </footer>
 
@@ -433,7 +442,7 @@
 
   <!-- Socket.io client script loading -->
   <script src="/socket.io/socket.io.js"></script>
-  <script src="client.js?v=3.1"></script>
+  <script src="client.js?v=3.5"></script>
 </body>
 
 </html>

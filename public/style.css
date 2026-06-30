@@ -15,6 +15,8 @@
   --color-dark: #000000;        /* Absolute Black for comic borders */
   --color-white: #ffffff;
   --color-muted: #4e4860;       /* Deep slate for descriptions */
+  --bg-gradient-fallback: #ff5e00;
+  
   
   /* Panel settings */
   --panel-bg: #ffffff;
@@ -48,7 +50,7 @@ body {
   width: 100vw;
   height: 100dvh;
   background: radial-gradient(circle at 15% 20%, var(--bg-gradient-start) 0%, transparent 65%),
-              radial-gradient(circle at 85% 80%, var(--bg-gradient-end) 0%, #ff5e00 100%);
+              radial-gradient(circle at 85% 80%, var(--bg-gradient-end) 0%, var(--bg-gradient-fallback, #ff5e00) 100%);
   background-size: 150% 150%;
   animation: auraShift 15s infinite alternate ease-in-out;
   position: relative;
@@ -1990,6 +1992,10 @@ input[type="text"]:focus, textarea:focus {
   box-shadow: 2px 2px 0 var(--color-dark);
 }
 
+.theme-toggle-btn {
+  background: var(--neon-yellow);
+}
+
 .footer-author-link {
   color: var(--neon-magenta);
   text-decoration: none;
@@ -2386,3 +2392,160 @@ input[type="text"]:focus, textarea:focus {
   84% { width: 55px; right: 0px; top: 35px; }
   100% { width: 47px; right: 8px; top: 38px; }
 }
+
+/* --- DARK THEME OVERRIDES --- */
+.dark-theme {
+  --panel-bg: #191426;
+  --panel-bg-translucent: rgba(25, 20, 38, 0.95);
+  --color-white: #1e192f;
+  --color-muted: #9f96b5;
+  --bg-gradient-start: #23083e; /* Deep purple */
+  --bg-gradient-end: #0e051c;   /* Dark violet */
+  --bg-gradient-fallback: #05020c;
+  --neon-yellow: #1e192f;
+  
+  /* Softened dark-neon palette for night playing */
+  --neon-cyan: #008f9c;
+  --neon-magenta: #a31859;
+  --neon-green: #1f854c;
+  --neon-purple: #5c3bb8;
+  --neon-orange: #a8470a;
+}
+
+/* Make sure html tag has background color matching theme when setting active */
+html.dark-theme {
+  background-color: #1e192f;
+}
+
+/* Ensure only actual card/panel text gets styled white in dark mode, leaving buttons/badges alone */
+.dark-theme .panel-card h1,
+.dark-theme .panel-card h2,
+.dark-theme .panel-card h3:not(.panel-title.text-green):not(.panel-title.text-blue):not(.panel-title.text-orange),
+.dark-theme .panel-card h4,
+.dark-theme .panel-card h5,
+.dark-theme .panel-card h6,
+.dark-theme .panel-card p:not(.badge-done),
+.dark-theme .panel-card label:not(.badge-done):not(.badge-pending),
+.dark-theme .panel-card span:not(.flag-icon):not(.theme-icon):not(.category-tag):not(.rank-badge):not(.status-badge),
+.dark-theme .question-text,
+.dark-theme .player-name,
+.dark-theme .lobby-info-text p,
+.dark-theme .player-item:not(.ready),
+.dark-theme .guesser-name,
+.dark-theme .answer-text,
+.dark-theme .affinity-score,
+.dark-theme .modal-title,
+.dark-theme .info-modal-content p,
+.dark-theme .info-modal-content li,
+.dark-theme .judged-q-header,
+.dark-theme .answer-label,
+.dark-theme .affinity-section-title,
+.dark-theme .status-item .player-name,
+.dark-theme .results-intro,
+.dark-theme .results-score-value,
+.dark-theme .footer-brand,
+.dark-theme .footer-links a,
+.dark-theme .volume-popup label {
+  color: #ffffff !important;
+}
+
+/* Make sure primary neon buttons and success badges always have black text */
+.dark-theme .primary-btn,
+.dark-theme .primary-btn *,
+.dark-theme .badge-done,
+.dark-theme .badge-done *,
+.dark-theme .status-badge.badge-done,
+.dark-theme .judge-btn,
+.dark-theme .judge-btn *,
+.dark-theme .action-tab-btn.active,
+.dark-theme .action-tab-btn.active *,
+.dark-theme .tab-btn.active,
+.dark-theme .tab-btn.active * {
+  color: #000000 !important;
+}
+
+/* Maintain black text color inside bright neon headers */
+.dark-theme .panel-title.text-green,
+.dark-theme .panel-title.text-blue,
+.dark-theme .panel-title.text-orange {
+  color: #000000 !important;
+}
+
+/* Correct contrast for tutorial text and warnings */
+.dark-theme .tutorial-text p,
+.dark-theme .warning-text,
+.dark-theme .lobby-info-text .warning-text {
+  color: #9f96b5 !important;
+}
+
+.dark-theme .warning-text,
+.dark-theme p.warning-text {
+  color: var(--neon-magenta) !important;
+}
+
+/* Correct button styles in dark mode so they remain highly legible */
+.dark-theme .secondary-btn {
+  background: #251e36 !important;
+  color: #ffffff !important;
+}
+
+.dark-theme .secondary-btn:hover {
+  background: #332a4a !important;
+}
+
+.dark-theme .lang-btn {
+  color: #000000 !important;
+}
+
+.dark-theme .social-icon {
+  color: #ffffff !important;
+}
+
+/* Make sure modal content matches theme */
+.dark-theme .info-modal-content {
+  background: #191426 !important;
+}
+
+/* Make input controls inside settings modal clean in dark mode */
+.dark-theme .volume-slider-group input[type="range"] {
+  background: #251e36 !important;
+}
+
+.dark-theme .lobby-code-box {
+  background: #251e36 !important;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3) !important;
+}
+
+.dark-theme .lobby-code-box h2 {
+  text-shadow: 2px 2px 0 #191426 !important;
+}
+
+.dark-theme .nav-arrow {
+  background: #251e36 !important;
+  color: #ffffff !important;
+}
+
+.dark-theme .affinity-card {
+  background: #251e36 !important;
+}
+
+.dark-theme input[type="text"] {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+.dark-theme .info-modal-close {
+  color: #ffffff !important;
+}
+
+.dark-theme .result-row {
+  background: #251e36 !important;
+}
+
+/* Keep gold, silver, bronze ranking rows text dark for optimal contrast */
+.dark-theme .result-row:nth-child(1) *,
+.dark-theme .result-row:nth-child(2) *,
+.dark-theme .result-row:nth-child(3) * {
+  color: var(--color-dark) !important;
+}
+

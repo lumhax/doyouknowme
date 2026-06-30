@@ -1002,6 +1002,26 @@ function setupEventListeners() {
       }
     });
   }
+
+  // Dark Mode Toggle
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-theme');
+      document.documentElement.classList.toggle('dark-theme');
+      const isDark = document.body.classList.contains('dark-theme');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      themeToggleBtn.textContent = isDark ? '☀️' : '🌙';
+    });
+
+    // Initialize button icon state
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      themeToggleBtn.textContent = '☀️';
+    } else {
+      themeToggleBtn.textContent = '🌙';
+    }
+  }
 }
 
 // SOCKET MESSAGE HANDLING
