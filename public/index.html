@@ -10,12 +10,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Outfit:wght@100..900&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=3.6">
+  <link rel="stylesheet" href="style.css?v=3.9">
   <script>
     (function() {
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme === 'dark') {
         document.documentElement.classList.add('dark-theme');
+      } else {
+        // Explicitly ensure light mode is default (remove any dark-theme class)
+        document.documentElement.classList.remove('dark-theme');
+        if (!savedTheme) localStorage.setItem('theme', 'light');
       }
     })();
   </script>
@@ -442,7 +446,7 @@
 
   <!-- Socket.io client script loading -->
   <script src="/socket.io/socket.io.js"></script>
-  <script src="client.js?v=3.6"></script>
+  <script src="client.js?v=3.9"></script>
 </body>
 
 </html>

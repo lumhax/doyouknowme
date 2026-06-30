@@ -495,7 +495,7 @@ function updateUILanguage() {
       if (el.tagName === 'INPUT' && el.hasAttribute('placeholder')) {
         el.setAttribute('placeholder', i18n[lang][key]);
       } else {
-        const span = el.querySelector('span');
+        const span = el.querySelector('span:not([class*="-icon"])') || el.querySelector('span');
         if (span) {
           span.textContent = i18n[lang][key];
         } else {
