@@ -2399,9 +2399,9 @@ input[type="text"]:focus, textarea:focus {
   --panel-bg-translucent: rgba(25, 20, 38, 0.95);
   --color-white: #1e192f;
   --color-muted: #9f96b5;
-  --bg-gradient-start: #23083e; /* Deep purple */
-  --bg-gradient-end: #0e051c;   /* Dark violet */
-  --bg-gradient-fallback: #05020c;
+  --bg-gradient-start: #44107a; /* Rich glowing violet */
+  --bg-gradient-end: #14052b;   /* Deep indigo */
+  --bg-gradient-fallback: #6b0739; /* Deep wine/raspberry rose */
   --neon-yellow: #1e192f;
   
   /* Softened dark-neon palette for night playing */
@@ -2410,6 +2410,11 @@ input[type="text"]:focus, textarea:focus {
   --neon-green: #1f854c;
   --neon-purple: #5c3bb8;
   --neon-orange: #a8470a;
+}
+
+/* Make halftone dots light/translucent in dark mode to preserve the goofy comic pattern */
+.dark-theme .game-container::before {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 2px, transparent 2px) !important;
 }
 
 /* Make sure html tag has background color matching theme when setting active */
