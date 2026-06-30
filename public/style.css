@@ -115,8 +115,6 @@ body {
 .lang-btn .flag-icon {
   height: 18px;
   width: auto;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 2px;
   flex-shrink: 0;
 }
 
@@ -1587,7 +1585,6 @@ input[type="text"]:focus, textarea:focus {
   .lang-btn .flag-icon {
     height: 11px;
     width: auto;
-    border-width: 0.5px;
   }
   
   .game-footer {
