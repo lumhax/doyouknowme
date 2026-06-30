@@ -50,6 +50,7 @@ function broadcastState(lobbyId) {
     gameState: room.gameState,
     currentRound: room.currentRound,
     maxRounds: room.maxRounds,
+    language: room.language || 'fr',
     currentQuestioner: currentQuestioner ? {
       id: currentQuestioner.id,
       username: currentQuestioner.username,
@@ -95,6 +96,13 @@ function startRoomTimer(lobbyId) {
   broadcastState(lobbyId);
 }
 
+const noAnswerText = {
+  fr: "[Pas de réponse à temps]",
+  en: "[No answer in time]",
+  es: "[Sin respuesta a tiempo]",
+  zh: "[未及时回答]"
+};
+
 // Transition helper: Move from Answering to Judging
 function transitionToJudging(lobbyId) {
   const room = rooms[lobbyId];
@@ -111,7 +119,7 @@ function transitionToJudging(lobbyId) {
       room.answers.push({
         playerId: p.id,
         username: p.username,
-        answerText: "[Pas de réponse à temps]",
+        answerText: noAnswerText[room.language || 'fr'] || "[No answer]",
         isValid: null
       });
     }
@@ -185,7 +193,8 @@ io.on('connection', (socket) => {
         currentAnswerIndex: 0,
         timerCountdown: 0,
         timerInterval: null,
-        affinities: {}
+        affinities: {},
+        language: 'fr'
       };
     }
 
@@ -270,6 +279,16 @@ io.on('connection', (socket) => {
     }
   });
 
+  // 3.5. Change Language
+  socket.on('change-language', ({ language }) => {
+    const lobbyId = socket.lobbyId;
+    const room = rooms[lobbyId];
+    if (room) {
+      room.language = language;
+      broadcastState(lobbyId);
+    }
+  });
+
   // 4. Questioner submits the selected question (transitions to answering)
   socket.on('submit-question', ({ text, category }) => {
     const lobbyId = socket.lobbyId;
@@ -279,15 +298,29 @@ io.on('connection', (socket) => {
     const questioner = room.players[room.currentQuestionerIndex];
     if (socket.id !== questioner.id) return;
 
-    // Track the question ID if it came from the JSON
-    if (room.currentQuestion && room.currentQuestion.text === text) {
+    let finalQuestionText;
+    let finalQuestionCategory;
+
+    // Check if the submitted text matches one of the translations of the current random question
+    const isRandomQ = room.currentQuestion && (
+      (typeof room.currentQuestion.text === 'string' && room.currentQuestion.text === text) ||
+      (typeof room.currentQuestion.text === 'object' && Object.values(room.currentQuestion.text).includes(text))
+    );
+
+    if (isRandomQ) {
+      finalQuestionText = room.currentQuestion.text;
+      finalQuestionCategory = room.currentQuestion.category;
       room.askedQuestionIds.push(room.currentQuestion.id);
+    } else {
+      // Custom question
+      finalQuestionText = { fr: text, en: text, es: text, zh: text };
+      finalQuestionCategory = { fr: category || 'Custom', en: category || 'Custom', es: category || 'Custom', zh: category || 'Custom' };
     }
 
     room.currentQuestion = {
       id: room.currentQuestion ? room.currentQuestion.id : Date.now(),
-      text,
-      category: category || 'Custom'
+      text: finalQuestionText,
+      category: finalQuestionCategory
     };
 
     room.gameState = 'ANSWERING';

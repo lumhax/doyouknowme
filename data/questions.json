@@ -1,27 +1,77 @@
 [
   {
     "id": 1,
-    "text": "Quel est mon plat préféré quand je suis fatigué ?",
-    "category": "Food"
+    "category": {
+      "fr": "Nourriture",
+      "en": "Food",
+      "es": "Comida",
+      "zh": "食物"
+    },
+    "text": {
+      "fr": "Quel est mon plat préféré quand je suis fatigué ?",
+      "en": "What is my favorite meal when I am tired?",
+      "es": "¿Cuál es mi comida favorita quand estoy cansado?",
+      "zh": "我累的时候最喜欢吃什么菜？"
+    }
   },
   {
     "id": 2,
-    "text": "Si je devais vivre dans un autre pays, ce serait lequel ?",
-    "category": "Travel"
+    "category": {
+      "fr": "Voyage",
+      "en": "Travel",
+      "es": "Viaje",
+      "zh": "旅行"
+    },
+    "text": {
+      "fr": "Si je devais vivre dans un autre pays, ce serait lequel ?",
+      "en": "If I had to live in another country, which one would it be?",
+      "es": "Si tuviera que vivir en otro país, ¿cuál sería?",
+      "zh": "如果我必须去另一个国家生活，会是哪一个？"
+    }
   },
   {
     "id": 3,
-    "text": "Quelle est ma plus grande phobie irrationnelle ?",
-    "category": "Personal"
+    "category": {
+      "fr": "Personnel",
+      "en": "Personal",
+      "es": "Personal",
+      "zh": "个人"
+    },
+    "text": {
+      "fr": "Quelle est ma plus grande phobie irrationnelle ?",
+      "en": "What is my biggest irrational phobia?",
+      "es": "¿Cuál es mi mayor fobia irracional?",
+      "zh": "我最大的无理恐惧是什么？"
+    }
   },
   {
     "id": 4,
-    "text": "Est-ce que je préfère me lever tôt ou me coucher tard ?",
-    "category": "Lifestyle"
+    "category": {
+      "fr": "Style de vie",
+      "en": "Lifestyle",
+      "es": "Estilo de vida",
+      "zh": "生活方式"
+    },
+    "text": {
+      "fr": "Est-ce que je préfère me lever tôt ou me coucher tard ?",
+      "en": "Do I prefer waking up early or sleeping in late?",
+      "es": "¿Prefiero levantarme temprano o acostarme tarde?",
+      "zh": "我更喜欢早起还是熬夜？"
+    }
   },
   {
     "id": 5,
-    "text": "Quel est le dernier film ou série qui m'a fait pleurer ?",
-    "category": "Pop Culture"
+    "category": {
+      "fr": "Pop Culture",
+      "en": "Pop Culture",
+      "es": "Cultura Pop",
+      "zh": "流行文化"
+    },
+    "text": {
+      "fr": "Quel est le dernier film ou série qui m'a fait pleurer ?",
+      "en": "What is the last movie or TV show that made me cry?",
+      "es": "¿Cuál es la última película o serie que me hizo llorar?",
+      "zh": "最近一部让我流泪的电影或电视剧是什么？"
+    }
   }
 ]

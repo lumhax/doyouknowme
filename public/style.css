@@ -112,6 +112,14 @@ body {
   transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+.lang-btn .flag-icon {
+  height: 18px;
+  width: auto;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
 .lang-btn:hover {
   transform: translateY(-2px);
   box-shadow: 6px 6px 0 var(--color-dark);
@@ -582,10 +590,11 @@ input[type="text"]:focus, textarea:focus {
 .tutorial-body {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   min-height: 480px;
   padding-bottom: 10px;
+  gap: 20px;
 }
 
 @keyframes slidePop {
@@ -1575,9 +1584,10 @@ input[type="text"]:focus, textarea:focus {
     box-shadow: 2px 2px 0 var(--color-dark);
   }
   
-  .lang-btn svg {
-    width: 10px;
-    height: 10px;
+  .lang-btn .flag-icon {
+    height: 11px;
+    width: auto;
+    border-width: 0.5px;
   }
   
   .game-footer {
@@ -2291,4 +2301,91 @@ input[type="text"]:focus, textarea:focus {
 .action-tab-btn.active {
   background: var(--neon-cyan);
   color: var(--color-dark);
+}
+
+/* Success Checkmark Animation and Styles */
+.submitted-confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 10px;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.submitted-confirmation h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--color-dark);
+  margin-top: 20px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.success-checkmark {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+}
+
+.success-checkmark .check-icon {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  border-radius: 50%;
+  box-sizing: content-box;
+  border: 4px solid var(--neon-green);
+  background: #ffffff;
+  box-shadow: 4px 4px 0 var(--color-dark);
+}
+
+.success-checkmark .check-icon .icon-line {
+  height: 5px;
+  background-color: var(--neon-green);
+  display: block;
+  border-radius: 2px;
+  position: absolute;
+  z-index: 10;
+}
+
+.success-checkmark .check-icon .icon-line.line-tip {
+  top: 46px;
+  left: 14px;
+  width: 25px;
+  transform: rotate(45deg);
+  animation: icon-line-tip 0.5s ease-out forwards;
+}
+
+.success-checkmark .check-icon .icon-line.line-long {
+  top: 38px;
+  right: 8px;
+  width: 47px;
+  transform: rotate(-45deg);
+  animation: icon-line-long 0.5s ease-out forwards;
+}
+
+.success-checkmark .check-icon .icon-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 10;
+  top: -4px;
+  left: -4px;
+  box-sizing: content-box;
+}
+
+@keyframes icon-line-tip {
+  0% { width: 0; left: 1px; top: 19px; }
+  54% { width: 0; left: 1px; top: 19px; }
+  70% { width: 50px; left: -8px; top: 37px; }
+  84% { width: 17px; left: 21px; top: 48px; }
+  100% { width: 25px; left: 14px; top: 46px; }
+}
+
+@keyframes icon-line-long {
+  0% { width: 0; right: 46px; top: 54px; }
+  65% { width: 0; right: 46px; top: 54px; }
+  84% { width: 55px; right: 0px; top: 35px; }
+  100% { width: 47px; right: 8px; top: 38px; }
 }
