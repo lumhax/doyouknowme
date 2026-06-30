@@ -226,6 +226,9 @@ io.on('connection', (socket) => {
 
     console.log(`[Socket] Player ${finalUsername} joined lobby ${targetLobbyId}`);
     
+    // Notify all players in the room about the new arrival
+    io.to(targetLobbyId).emit('player-joined', { username: finalUsername });
+
     // Broadcast updated state
     broadcastState(targetLobbyId);
   });
@@ -382,6 +385,13 @@ io.on('connection', (socket) => {
         const targetPlayer = room.players.find(p => p.id === answer.playerId);
         if (targetPlayer) {
           targetPlayer.score += 10;
+
+          // Emit score-awarded event for animated +10 popup
+          io.to(lobbyId).emit('score-awarded', {
+            playerId: answer.playerId,
+            username: answer.username,
+            points: 10
+          });
         }
         
         // Track affinity: player who guessed knows the questioner
@@ -464,6 +474,9 @@ io.on('connection', (socket) => {
       if (index !== -1) {
         const removedPlayer = room.players.splice(index, 1)[0];
         console.log(`[Socket] Player ${removedPlayer.username} left room ${lobbyId}`);
+
+        // Notify remaining players about the departure
+        io.to(lobbyId).emit('player-left', { username: removedPlayer.username });
       }
 
       // Clean up room if empty (with a grace period to handle transient disconnects)

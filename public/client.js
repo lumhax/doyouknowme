@@ -1390,15 +1390,20 @@ function renderResultsView(state) {
     const avatarSVG = generateAvatarSVG(p.avatar);
     
     const row = document.createElement('div');
-    row.className = 'result-row';
+    row.className = 'result-row result-row-animated';
+    row.style.animationDelay = `${idx * 0.15}s`;
     
     const youLabel = p.id === socket.id ? youLabelText : '';
+    
+    // Podium medal emojis for top 3
+    const medals = ['🏆', '🥈', '🥉'];
+    const medal = idx < 3 ? `<span class="podium-medal">${medals[idx]}</span>` : '';
     
     row.innerHTML = `
       <div class="rank-badge">${idx + 1}</div>
       <div class="results-player-info">
         <div class="player-avatar" style="width: 34px; height: 34px;">${avatarSVG}</div>
-        <div class="player-name">${p.username} ${youLabel}</div>
+        <div class="player-name">${medal} ${p.username} ${youLabel}</div>
       </div>
       <div class="results-score-value">${p.score} pts</div>
     `;
@@ -1406,7 +1411,8 @@ function renderResultsView(state) {
     container.appendChild(row);
   });
 
-  // Render Affinities Graph connections
+  // 🎉 Launch confetti!
+  launchConfetti();
   const affinitiesContainer = document.getElementById('affinity-connections-container');
   affinitiesContainer.innerHTML = '';
 
@@ -1646,5 +1652,159 @@ document.addEventListener('visibilitychange', () => {
         sounds.bgMusic.play().catch(err => console.warn("Failed to resume background music on tab focus:", err));
       }
     }
+  }
+});
+
+// =============================================
+// 🎉 CONFETTI CANNON (Canvas-based)
+// =============================================
+function launchConfetti() {
+  const canvas = document.createElement('canvas');
+  canvas.id = 'confetti-canvas';
+  canvas.style.cssText = 'position:fixed;inset:0;z-index:9999;pointer-events:none;';
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const colors = ['#ff5757','#ffc048','#2ecc71','#00b8d4','#e056fd','#fdcb6e','#6c5ce7','#ff6b81','#1dd1a1','#54a0ff'];
+  const particles = [];
+  const PARTICLE_COUNT = 150;
+
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    particles.push({
+      x: canvas.width * 0.5 + (Math.random() - 0.5) * 100,
+      y: canvas.height * 0.5,
+      vx: (Math.random() - 0.5) * 18,
+      vy: -Math.random() * 22 - 5,
+      w: Math.random() * 10 + 4,
+      h: Math.random() * 6 + 2,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rotation: Math.random() * 360,
+      rotSpeed: (Math.random() - 0.5) * 15,
+      gravity: 0.35 + Math.random() * 0.15,
+      opacity: 1,
+      decay: 0.006 + Math.random() * 0.008
+    });
+  }
+
+  let running = true;
+  function animate() {
+    if (!running) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    let alive = false;
+    particles.forEach(p => {
+      p.vy += p.gravity;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vx *= 0.99;
+      p.rotation += p.rotSpeed;
+      p.opacity -= p.decay;
+      if (p.opacity <= 0) return;
+      alive = true;
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate((p.rotation * Math.PI) / 180);
+      ctx.globalAlpha = p.opacity;
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+    });
+
+    if (alive) {
+      requestAnimationFrame(animate);
+    } else {
+      running = false;
+      canvas.remove();
+      window.removeEventListener('resize', resize);
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+// =============================================
+// 🔔 TOAST NOTIFICATION SYSTEM
+// =============================================
+
+// Create a fixed container for toasts
+(function initToastContainer() {
+  const container = document.createElement('div');
+  container.id = 'toast-container';
+  container.className = 'toast-container';
+  document.body.appendChild(container);
+})();
+
+function showToast(message, type = 'info') {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+
+  const icons = { join: '👋', leave: '🚪', score: '⭐', info: 'ℹ️' };
+  toast.innerHTML = `<span class="toast-icon">${icons[type] || icons.info}</span><span class="toast-message">${message}</span>`;
+
+  container.appendChild(toast);
+
+  // Auto-dismiss after 3.5s
+  setTimeout(() => {
+    toast.classList.add('toast-exit');
+    setTimeout(() => toast.remove(), 400);
+  }, 3500);
+}
+
+// Socket listeners for toasts
+socket.on('player-joined', ({ username }) => {
+  const msgs = {
+    fr: `${username} a rejoint le salon !`,
+    en: `${username} joined the room!`,
+    es: `¡${username} se unió a la sala!`,
+    zh: `${username} 加入了房间！`
+  };
+  showToast(msgs[currentLanguage] || msgs.fr, 'join');
+});
+
+socket.on('player-left', ({ username }) => {
+  const msgs = {
+    fr: `${username} a quitté le salon`,
+    en: `${username} left the room`,
+    es: `${username} dejó la sala`,
+    zh: `${username} 离开了房间`
+  };
+  showToast(msgs[currentLanguage] || msgs.fr, 'leave');
+});
+
+// =============================================
+// ✨ SCORE ANIMATION (+10 pts popup)
+// =============================================
+socket.on('score-awarded', ({ playerId, username, points }) => {
+  // Show toast
+  const msgs = {
+    fr: `${username} gagne +${points} pts ! ✨`,
+    en: `${username} earned +${points} pts! ✨`,
+    es: `¡${username} ganó +${points} pts! ✨`,
+    zh: `${username} 获得了 +${points} 分！✨`
+  };
+  showToast(msgs[currentLanguage] || msgs.fr, 'score');
+
+  // Spawn floating "+10" on the reveal bubble area
+  const bubble = document.getElementById('reveal-answer-bubble');
+  if (bubble) {
+    const popup = document.createElement('div');
+    popup.className = 'score-popup';
+    popup.textContent = `+${points}`;
+    // Position above the bubble
+    const rect = bubble.getBoundingClientRect();
+    popup.style.left = rect.left + rect.width / 2 + 'px';
+    popup.style.top = rect.top + 'px';
+    document.body.appendChild(popup);
+    setTimeout(() => popup.remove(), 1500);
   }
 });
