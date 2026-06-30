@@ -2867,10 +2867,25 @@ html.dark-theme {
 /* player-row in lobby (white card per player) */
 .dark-theme .player-row {
   background: #342e42 !important;
+  border-color: #534a66 !important;
 }
 .dark-theme .player-row .player-name,
-.dark-theme .player-row span {
+.dark-theme .player-row .player-name *,
+.dark-theme .player-row span:not(.status-ready):not(.status-waiting) {
   color: #ffffff !important;
+}
+
+/* "ATTENTE" (waiting) badge in dark mode */
+.dark-theme .status-waiting {
+  background: #443c57 !important;
+  color: #c8b8e8 !important;
+  border-color: #534a66 !important;
+}
+
+/* Player avatar yellow circle in dark mode */
+.dark-theme .player-avatar {
+  background: #443c57 !important;
+  border-color: #534a66 !important;
 }
 
 /* status-item (answering status list) */
