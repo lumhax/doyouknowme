@@ -104,7 +104,8 @@ const avatars = [
   { key: 'avatar_02', name: 'Canard Casqué', path: 'avatar_02.png' },
   { key: 'avatar_03', name: 'Grenouille Couronne', path: 'avatar_03.png' },
   { key: 'avatar_04', name: 'Renard Feuille', path: 'avatar_04.png' },
-  { key: 'avatar_05', name: 'Chat Lunettes', path: 'avatar_05.png' }
+  { key: 'avatar_05', name: 'Chat Lunettes', path: 'avatar_05.png' },
+  { key: 'avatar_06', name: 'Charlie Chaplin', path: 'avatar_06.png' }
 ];
 function generateAvatarSVG(avatarKey) {
   const std = avatars.find(a => a.key === avatarKey);
