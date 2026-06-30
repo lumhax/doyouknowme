@@ -1006,21 +1006,23 @@ function setupEventListeners() {
   // Dark Mode Toggle
   const themeToggleBtn = document.getElementById('themeToggleBtn');
   if (themeToggleBtn) {
-    themeToggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('dark-theme');
-      document.documentElement.classList.toggle('dark-theme');
-      const isDark = document.body.classList.contains('dark-theme');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    const updateToggleIcon = () => {
+      const isDark = document.documentElement.classList.contains('dark-theme');
       themeToggleBtn.textContent = isDark ? '☀️' : '🌙';
+    };
+
+    themeToggleBtn.addEventListener('click', () => {
+      // Toggle ONLY on <html> — same element the init script uses
+      document.documentElement.classList.toggle('dark-theme');
+      // Keep body in sync for any CSS rules targeting .dark-theme on body
+      document.body.classList.toggle('dark-theme', document.documentElement.classList.contains('dark-theme'));
+      const isDark = document.documentElement.classList.contains('dark-theme');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      updateToggleIcon();
     });
 
-    // Initialize button icon state
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      themeToggleBtn.textContent = '☀️';
-    } else {
-      themeToggleBtn.textContent = '🌙';
-    }
+    // Initialize button icon from current HTML element state
+    updateToggleIcon();
   }
 }
 

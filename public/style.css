@@ -2845,3 +2845,82 @@ html.dark-theme {
 .dark-theme .result-row:nth-child(3) * {
   color: var(--color-dark) !important;
 }
+
+/* ---- MISSING WHITE BACKGROUNDS: comprehensive dark fixes ---- */
+
+/* question-composer area (white background inside card) */
+.dark-theme .question-composer {
+  background: #201c29 !important;
+}
+
+/* question-display-box (the light pink/yellow gradient box) */
+.dark-theme .question-display-box {
+  background: #201c29 !important;
+  color: #ffffff !important;
+}
+.dark-theme .question-display-box .question-text,
+.dark-theme .question-display-box .question-text-sm,
+.dark-theme .question-display-box .judged-q-header {
+  color: #ffffff !important;
+}
+
+/* player-row in lobby (white card per player) */
+.dark-theme .player-row {
+  background: #342e42 !important;
+}
+.dark-theme .player-row .player-name,
+.dark-theme .player-row span {
+  color: #ffffff !important;
+}
+
+/* status-item (answering status list) */
+.dark-theme .status-item {
+  background: #342e42 !important;
+}
+
+/* Comic speech bubble in tutorial */
+.dark-theme .comic-bubble {
+  background: #342e42 !important;
+  color: #ffffff !important;
+}
+
+/* Custom question tag / category badge */
+.dark-theme .custom-question-tag,
+.dark-theme .category-badge {
+  background: #342e42 !important;
+  color: #ffffff !important;
+}
+
+/* Affinity card */
+.dark-theme .affinity-card {
+  background: #342e42 !important;
+}
+
+/* result-row default (non-podium rows) */
+.dark-theme .result-row {
+  background: #342e42 !important;
+}
+
+/* question-text & related text colors */
+.dark-theme .question-text,
+.dark-theme .question-text-sm,
+.dark-theme .control-label,
+.dark-theme .judged-q-header,
+.dark-theme .tutorial-text h4,
+.dark-theme .results-score-value {
+  color: #ffffff !important;
+}
+
+/* Judge buttons text */
+.dark-theme .judge-btn {
+  color: #ffffff !important;
+}
+.dark-theme .judge-btn * {
+  color: #ffffff !important;
+}
+
+/* Lang button stays black text on white pill */
+.dark-theme .lang-btn {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
