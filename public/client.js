@@ -1060,6 +1060,72 @@ socket.on('room-state', (roomState) => {
       switchScreen('results');
       break;
   }
+
+  // Show reaction bar only during active game phases (not lobby / results)
+  const reactionBar = document.getElementById('reaction-bar');
+  if (reactionBar) {
+    const activePhases = ['PICKING', 'ANSWERING', 'JUDGING'];
+    reactionBar.style.display = activePhases.includes(roomState.gameState) ? 'flex' : 'none';
+  }
+});
+
+// ---- EMOJI REACTIONS ----
+
+// Spawn a floating emoji on screen at random horizontal position
+function spawnFloatingEmoji(emoji, username) {
+  const stage = document.getElementById('reaction-stage');
+  if (!stage) return;
+
+  const el = document.createElement('div');
+  el.className = 'floating-emoji';
+  el.style.left = (10 + Math.random() * 80) + '%';
+  // Slight random size variation for depth feel
+  const scale = 0.85 + Math.random() * 0.5;
+  el.style.fontSize = (36 * scale) + 'px';
+  // Slight random duration variation
+  const dur = 2.0 + Math.random() * 0.8;
+  el.style.animationDuration = dur + 's';
+
+  el.innerHTML = `${emoji}<div class="floating-emoji-label">${username}</div>`;
+  stage.appendChild(el);
+
+  // Remove from DOM after animation finishes
+  setTimeout(() => el.remove(), dur * 1000 + 100);
+}
+
+// Listen for reactions from server → animate on screen
+socket.on('reaction-received', ({ emoji, username }) => {
+  spawnFloatingEmoji(emoji, username);
+});
+
+// Reaction bar: click to send + animate button
+document.addEventListener('DOMContentLoaded', () => {
+  // Use event delegation on the bar
+  const bar = document.getElementById('reaction-bar');
+  if (!bar) return;
+
+  let localCooldownUntil = 0;
+
+  bar.addEventListener('click', (e) => {
+    const btn = e.target.closest('.reaction-btn');
+    if (!btn) return;
+
+    const emoji = btn.dataset.emoji;
+    if (!emoji) return;
+
+    const now = Date.now();
+    if (now < localCooldownUntil) return; // client-side rate limit
+
+    localCooldownUntil = now + 800;
+
+    // Visual feedback on button
+    btn.classList.remove('fired');
+    void btn.offsetWidth; // force reflow to restart animation
+    btn.classList.add('fired');
+    setTimeout(() => btn.classList.remove('fired'), 300);
+
+    socket.emit('send-reaction', { emoji });
+  });
 });
 
 // VIEW RENDERERS

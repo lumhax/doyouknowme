@@ -425,6 +425,33 @@ io.on('connection', (socket) => {
     broadcastState(lobbyId);
   });
 
+  // 8. Emoji Reactions (rate-limited: 1 per player per second)
+  const reactionCooldowns = new Map(); // socketId -> timestamp
+  socket.on('send-reaction', ({ emoji }) => {
+    const lobbyId = socket.lobbyId;
+    const room = rooms[lobbyId];
+    if (!room) return;
+
+    // Whitelist allowed emojis
+    const allowed = ['🔥','😂','❤️','😱','👏','💀','🤣','🥶'];
+    if (!allowed.includes(emoji)) return;
+
+    // Rate limit: 1 reaction per second per player
+    const now = Date.now();
+    const lastSent = reactionCooldowns.get(socket.id) || 0;
+    if (now - lastSent < 800) return;
+    reactionCooldowns.set(socket.id, now);
+
+    const player = room.players.find(p => p.id === socket.id);
+    if (!player) return;
+
+    io.to(lobbyId).emit('reaction-received', {
+      emoji,
+      username: player.username,
+      senderId: socket.id
+    });
+  });
+
   // 8. Disconnect
   socket.on('disconnect', () => {
     console.log(`[Socket] Client disconnected: ${socket.id}`);

@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Outfit:wght@100..900&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=4.1">
+  <link rel="stylesheet" href="style.css?v=4.2">
   <script>
     (function() {
       const savedTheme = localStorage.getItem('theme');
@@ -433,6 +433,7 @@
       </div>
     </div>
   </div>
+  </div>
 
   <!-- Info Modal for Footer Links -->
   <div class="info-modal" id="infoModal">
@@ -444,9 +445,24 @@
     </div>
   </div>
 
+  <!-- Emoji Reaction Bar (visible during game phases) -->
+  <div id="reaction-bar" class="reaction-bar" style="display:none;">
+    <button class="reaction-btn" data-emoji="🔥">🔥</button>
+    <button class="reaction-btn" data-emoji="😂">😂</button>
+    <button class="reaction-btn" data-emoji="❤️">❤️</button>
+    <button class="reaction-btn" data-emoji="😱">😱</button>
+    <button class="reaction-btn" data-emoji="👏">👏</button>
+    <button class="reaction-btn" data-emoji="💀">💀</button>
+    <button class="reaction-btn" data-emoji="🤣">🤣</button>
+    <button class="reaction-btn" data-emoji="🥶">🥶</button>
+  </div>
+
+  <!-- Floating emoji animations container -->
+  <div id="reaction-stage" class="reaction-stage" aria-hidden="true"></div>
+
   <!-- Socket.io client script loading -->
   <script src="/socket.io/socket.io.js"></script>
-  <script src="client.js?v=4.0"></script>
+  <script src="client.js?v=4.2"></script>
 </body>
 
 </html>
