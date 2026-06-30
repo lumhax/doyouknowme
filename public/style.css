@@ -1556,7 +1556,11 @@ input[type="text"]:focus, textarea:focus {
   }
   
   .logo-sub {
-    display: none !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
   }
   
   .header-left {
