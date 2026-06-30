@@ -170,16 +170,42 @@ function saveFinalScores(room) {
   // Integrate standard NoSQL database persistence here in production
 }
 
+// Track all room codes ever used (never reuse during server lifetime)
+const usedCodes = new Set();
+
+function generateUniqueRoomCode() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no 0/O/1/I to avoid confusion
+  let code;
+  do {
+    code = '';
+    for (let i = 0; i < 6; i++) {
+      code += chars[Math.floor(Math.random() * chars.length)];
+    }
+  } while (usedCodes.has(code) || rooms[code]);
+  usedCodes.add(code);
+  return code;
+}
+
 io.on('connection', (socket) => {
   console.log(`[Socket] Client connected: ${socket.id}`);
 
   // 1. Join / Create Room
-  socket.on('join-room', ({ username, avatar, lobbyId }) => {
+  // Track all codes ever used (never reuse)
+  socket.on('join-room', ({ username, avatar, lobbyId, action }) => {
     let targetLobbyId = lobbyId ? lobbyId.toUpperCase().trim() : null;
 
-    // Create a new lobby if not provided or doesn't exist
-    if (!targetLobbyId || !rooms[targetLobbyId]) {
-      targetLobbyId = targetLobbyId || Math.random().toString(36).substring(2, 8).toUpperCase();
+    // JOIN an existing room
+    if (action === 'join' && targetLobbyId && rooms[targetLobbyId]) {
+      // Room exists — join it (handled below)
+    }
+    // JOIN attempt but room doesn't exist
+    else if (action === 'join' && targetLobbyId && !rooms[targetLobbyId]) {
+      socket.emit('join-error', { message: 'Room not found' });
+      return;
+    }
+    // CREATE a new room — always generate a random unique code
+    else {
+      targetLobbyId = generateUniqueRoomCode();
       rooms[targetLobbyId] = {
         lobbyId: targetLobbyId,
         gameState: 'LOBBY',

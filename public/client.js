@@ -713,8 +713,8 @@ function setupEventListeners() {
       const nicknameInput = document.getElementById('nickname-input');
       const username = nicknameInput.value.trim() || 'Anonyme';
       const avatar = avatars[currentAvatarIndex].key;
-      // Emit join-room with empty lobbyId to create a new room
-      socket.emit('join-room', { username, avatar, lobbyId: "" });
+      // Emit join-room with action 'create' to generate a new random room code
+      socket.emit('join-room', { username, avatar, lobbyId: "", action: 'create' });
     });
   }
 
@@ -734,7 +734,7 @@ function setupEventListeners() {
         return;
       }
       
-      socket.emit('join-room', { username, avatar, lobbyId });
+      socket.emit('join-room', { username, avatar, lobbyId, action: 'join' });
     });
   }
 
@@ -1096,6 +1096,17 @@ function spawnFloatingEmoji(emoji, username) {
 // Listen for reactions from server → animate on screen
 socket.on('reaction-received', ({ emoji, username }) => {
   spawnFloatingEmoji(emoji, username);
+});
+
+// Listen for join errors (e.g. room code not found)
+socket.on('join-error', ({ message }) => {
+  const msgs = {
+    fr: 'Ce code de salon est introuvable ! Vérifie le code et réessaie.',
+    en: 'Room not found! Check the code and try again.',
+    es: '¡Sala no encontrada! Verifica el código e inténtalo de nuevo.',
+    zh: '找不到房间！请检查代码并重试。'
+  };
+  alert(msgs[currentLanguage] || msgs.fr);
 });
 
 // Reaction bar: click to send + animate button
