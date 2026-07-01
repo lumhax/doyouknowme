@@ -105,7 +105,13 @@ body {
 }
 
 .header-right {
-  display: none;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 10;
 }
 
 /* Language selector */
@@ -1043,7 +1049,7 @@ textarea:focus {
   font-family: var(--font-display);
   font-size: 24px;
   font-weight: 900;
-  color: var(--color-white);
+  color: #ffffff !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1763,6 +1769,11 @@ textarea:focus {
   .header-left {
     top: 6px;
     left: 6px;
+  }
+
+  .header-right {
+    top: 6px;
+    right: 6px;
   }
 
   .lang-btn {
@@ -3205,4 +3216,67 @@ html.dark-theme {
 .dark-theme .score-popup {
   color: #1dd1a1 !important;
   text-shadow: 0 2px 12px rgba(29, 209, 161, 0.6), 2px 2px 0 #13101a !important;
+}
+
+/* =============================================
+   📍 ROUND COUNTER & ABANDON BUTTON IN HEADER
+   ============================================= */
+
+.global-round-counter {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--color-dark);
+  background: var(--neon-cyan);
+  border: 3px solid var(--color-dark);
+  padding: 6px 12px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 0 var(--color-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dark-theme .global-round-counter {
+  color: #ffffff !important;
+  background: #5c3b8c !important;
+  border-color: #534a66 !important;
+  box-shadow: 2px 2px 0 #1a1520 !important;
+}
+
+#abandonGameBtn {
+  background: #ff7675;
+  color: var(--color-dark);
+  font-family: var(--font-display);
+  font-weight: 900;
+  border: 3px solid var(--color-dark);
+  box-shadow: 2px 2px 0 var(--color-dark);
+  transition: all 0.15s ease;
+}
+
+#abandonGameBtn:hover {
+  background: #ff5252;
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 var(--color-dark);
+}
+
+#abandonGameBtn:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 var(--color-dark);
+}
+
+.dark-theme #abandonGameBtn {
+  background: #803030 !important;
+  color: #ffffff !important;
+  border-color: #534a66 !important;
+  box-shadow: 2px 2px 0 #1a1520 !important;
+}
+
+.dark-theme #abandonGameBtn:hover {
+  background: #a04040 !important;
+  box-shadow: 4px 4px 0 #1a1520 !important;
+}
+
+.dark-theme #abandonGameBtn:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 #1a1520 !important;
 }

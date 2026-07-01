@@ -96,13 +96,6 @@ function startRoomTimer(lobbyId) {
   broadcastState(lobbyId);
 }
 
-const noAnswerText = {
-  fr: "[Pas de réponse à temps]",
-  en: "[No answer in time]",
-  es: "[Sin respuesta a tiempo]",
-  zh: "[未及时回答]"
-};
-
 // Transition helper: Move from Answering to Judging
 function transitionToJudging(lobbyId) {
   const room = rooms[lobbyId];
@@ -119,7 +112,7 @@ function transitionToJudging(lobbyId) {
       room.answers.push({
         playerId: p.id,
         username: p.username,
-        answerText: noAnswerText[room.language || 'fr'] || "[No answer]",
+        answerText: '__NO_ANSWER__',
         isValid: null
       });
     }
@@ -168,6 +161,16 @@ function saveFinalScores(room) {
   };
   console.log('[NoSQL DB] Saving final scores:', JSON.stringify(scoreData, null, 2));
   // Integrate standard NoSQL database persistence here in production
+}
+
+function escapeHTML(str) {
+  if (typeof str !== 'string') return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
 }
 
 // Track all room codes ever used (never reuse during server lifetime)
@@ -233,10 +236,12 @@ io.on('connection', (socket) => {
       console.log(`[Socket] Room ${targetLobbyId} cleanup cancelled (player joined).`);
     }
 
+    const cleanUsername = escapeHTML((username || 'Anonyme').trim().substring(0, 16));
+
     // Avoid duplicate usernames inside the same lobby
-    const finalUsername = room.players.some(p => p.username === username)
-      ? `${username}#${Math.floor(Math.random() * 900) + 100}`
-      : username;
+    const finalUsername = room.players.some(p => p.username === cleanUsername)
+      ? `${cleanUsername}#${Math.floor(Math.random() * 900) + 100}`
+      : cleanUsername;
 
     const newPlayer = {
       id: socket.id,
@@ -308,16 +313,6 @@ io.on('connection', (socket) => {
     }
   });
 
-  // 3.5. Change Language
-  socket.on('change-language', ({ language }) => {
-    const lobbyId = socket.lobbyId;
-    const room = rooms[lobbyId];
-    if (room) {
-      room.language = language;
-      broadcastState(lobbyId);
-    }
-  });
-
   // 4. Questioner submits the selected question (transitions to answering)
   socket.on('submit-question', ({ text, category }) => {
     const lobbyId = socket.lobbyId;
@@ -341,9 +336,12 @@ io.on('connection', (socket) => {
       finalQuestionCategory = room.currentQuestion.category;
       room.askedQuestionIds.push(room.currentQuestion.id);
     } else {
-      // Custom question
-      finalQuestionText = { fr: text, en: text, es: text, zh: text };
-      finalQuestionCategory = { fr: category || 'Custom', en: category || 'Custom', es: category || 'Custom', zh: category || 'Custom' };
+      // Custom question - escape and enforce length limits
+      const escapedText = escapeHTML((text || '').trim().substring(0, 150));
+      const escapedCategory = escapeHTML((category || 'Custom').trim().substring(0, 30));
+
+      finalQuestionText = { fr: escapedText, en: escapedText, es: escapedText, zh: escapedText };
+      finalQuestionCategory = { fr: escapedCategory, en: escapedCategory, es: escapedCategory, zh: escapedCategory };
     }
 
     room.currentQuestion = {
@@ -374,10 +372,13 @@ io.on('connection', (socket) => {
     // Avoid double answers
     if (room.answers.some(a => a.playerId === socket.id)) return;
 
+    // Sanitization & Length Enforcement
+    const escapedAnswerText = escapeHTML((answerText || '').trim().substring(0, 100));
+
     room.answers.push({
       playerId: socket.id,
       username: player.username,
-      answerText: answerText || "[Vide]",
+      answerText: escapedAnswerText || "[Vide]",
       isValid: null
     });
 
@@ -445,6 +446,12 @@ io.on('connection', (socket) => {
     const room = rooms[lobbyId];
     if (!room) return;
 
+    // SECURITY CHECK: Only host (first player in the room list) can restart
+    if (room.players.length > 0 && socket.id !== room.players[0].id) {
+      console.warn(`[Security Alert] Non-host socket tried to restart game: ${socket.id}`);
+      return;
+    }
+
     room.gameState = 'LOBBY';
     room.currentRound = 1;
     room.currentQuestionerIndex = 0;
@@ -459,6 +466,46 @@ io.on('connection', (socket) => {
     });
 
     broadcastState(lobbyId);
+  });
+
+  // 7.5. Leave Room Handler
+  socket.on('leave-room', () => {
+    const lobbyId = socket.lobbyId;
+    const room = rooms[lobbyId];
+    if (room) {
+      const index = room.players.findIndex(p => p.id === socket.id);
+      if (index !== -1) {
+        const removedPlayer = room.players.splice(index, 1)[0];
+        console.log(`[Socket] Player ${removedPlayer.username} left room ${lobbyId} manually.`);
+        io.to(lobbyId).emit('player-left', { username: removedPlayer.username });
+      }
+
+      socket.leave(lobbyId);
+      socket.lobbyId = null;
+
+      // Clean up room if empty
+      if (room.players.length === 0) {
+        clearInterval(room.timerInterval);
+        if (room.cleanupTimeout) clearTimeout(room.cleanupTimeout);
+        delete rooms[lobbyId];
+        console.log(`[Socket] Room ${lobbyId} is empty. Deleted immediately on leave.`);
+      } else {
+        if (room.currentQuestionerIndex >= room.players.length) {
+          room.currentQuestionerIndex = 0;
+        }
+        
+        // Transition if in ANSWERING state and now required count met
+        if (room.gameState === 'ANSWERING') {
+          const requiredAnswersCount = room.players.length - 1;
+          const currentAnswersCount = room.answers.length;
+          if (currentAnswersCount >= requiredAnswersCount) {
+            transitionToJudging(lobbyId);
+            return;
+          }
+        }
+        broadcastState(lobbyId);
+      }
+    }
   });
 
   // 8. Emoji Reactions (rate-limited: 1 per player per second)

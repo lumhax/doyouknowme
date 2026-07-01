@@ -105,7 +105,8 @@ socket.on('connect_error', (err) => {
 let currentLobbyState = null;
 let currentAvatarIndex = 0;
 let tutorialSlideIndex = 0;
-let currentLanguage = 'fr';
+let lastQuestionId = null;
+let currentLanguage = localStorage.getItem('lang') || 'fr';
 
 const i18n = {
   fr: {
@@ -160,7 +161,10 @@ const i18n = {
     volumePopBtnTooltip: "Réglages du son",
     alertNoRoomCode: "Veuillez saisir un code de salon !",
     alertNoQuestion: "Veuillez saisir ou choisir une question !",
-    alertNoAnswer: "Veuillez écrire une réponse !"
+    alertNoAnswer: "Veuillez écrire une réponse !",
+    leaveLobbyBtnLabel: "QUITTER LE SALON",
+    abandonBtnLabel: "ABANDONNER 🏳️",
+    noAnswerText: "[Pas de réponse à temps]"
   },
   en: {
     lancerJeu: "START GAME",
@@ -214,7 +218,10 @@ const i18n = {
     volumePopBtnTooltip: "Sound settings",
     alertNoRoomCode: "Please enter a lobby code!",
     alertNoQuestion: "Please write or pick a question!",
-    alertNoAnswer: "Please write an answer!"
+    alertNoAnswer: "Please write an answer!",
+    leaveLobbyBtnLabel: "LEAVE LOBBY",
+    abandonBtnLabel: "ABANDON 🏳️",
+    noAnswerText: "[No answer in time]"
   },
   es: {
     lancerJeu: "INICIAR JUEGO",
@@ -268,7 +275,10 @@ const i18n = {
     volumePopBtnTooltip: "Ajustes de sonido",
     alertNoRoomCode: "¡Por favor, introduce un código de sala!",
     alertNoQuestion: "¡Por favor, escribe o elige una pregunta!",
-    alertNoAnswer: "¡Por favor, escribe una respuesta!"
+    alertNoAnswer: "¡Por favor, escribe una respuesta!",
+    leaveLobbyBtnLabel: "ABANDONAR SALA",
+    abandonBtnLabel: "ABANDONAR 🏳️",
+    noAnswerText: "[Sin respuesta a tiempo]"
   },
   zh: {
     lancerJeu: "开始游戏",
@@ -322,7 +332,10 @@ const i18n = {
     volumePopBtnTooltip: "音量设置",
     alertNoRoomCode: "请输入房间代码！",
     alertNoQuestion: "请写一个或选择一个问题！",
-    alertNoAnswer: "请输入你的答案！"
+    alertNoAnswer: "请输入你的答案！",
+    leaveLobbyBtnLabel: "退出房间",
+    abandonBtnLabel: "放弃游戏 🏳️",
+    noAnswerText: "[未及时回答]"
   }
 };
 
@@ -765,6 +778,44 @@ function setupEventListeners() {
     socket.emit('toggle-ready');
   });
 
+  // Lobby Leave Trigger
+  const leaveLobbyBtn = document.getElementById('leaveLobbyBtn');
+  if (leaveLobbyBtn) {
+    leaveLobbyBtn.addEventListener('click', () => {
+      socket.emit('leave-room');
+      currentLobbyState = null;
+      lastQuestionId = null; // Reset last question tracking
+      switchScreen('login');
+      // Hide global counter and abandon button
+      const roundCounter = document.getElementById('global-round-counter');
+      if (roundCounter) roundCounter.style.display = 'none';
+      const abandonBtn = document.getElementById('abandonGameBtn');
+      if (abandonBtn) abandonBtn.style.display = 'none';
+    });
+  }
+
+  // Abandon Game Trigger
+  const abandonGameBtn = document.getElementById('abandonGameBtn');
+  if (abandonGameBtn) {
+    abandonGameBtn.addEventListener('click', () => {
+      const confirmMsg = {
+        fr: "Voulez-vous vraiment abandonner la partie et retourner au menu principal ?",
+        en: "Do you really want to abandon the game and return to the main menu?",
+        es: "¿De verdad quieres abandonar la partida y volver al menú principal?",
+        zh: "您确定要放弃游戏并返回主菜单吗？"
+      };
+      if (confirm(confirmMsg[currentLanguage] || confirmMsg.fr)) {
+        socket.emit('leave-room');
+        currentLobbyState = null;
+        lastQuestionId = null; // Reset last question tracking
+        switchScreen('login');
+        const roundCounter = document.getElementById('global-round-counter');
+        if (roundCounter) roundCounter.style.display = 'none';
+        abandonGameBtn.style.display = 'none';
+      }
+    });
+  }
+
   // Questioner: Random Question trigger
   document.getElementById('randomQuestionBtn').addEventListener('click', () => {
     socket.emit('pick-random-question');
@@ -995,11 +1046,8 @@ function setupEventListeners() {
       const order = ['fr', 'en', 'es', 'zh'];
       const nextIdx = (order.indexOf(currentLanguage) + 1) % order.length;
       currentLanguage = order[nextIdx];
+      localStorage.setItem('lang', currentLanguage);
       updateUILanguage();
-
-      if (currentLobbyState && currentLobbyState.lobbyId) {
-        socket.emit('change-language', { language: currentLanguage });
-      }
     });
   }
 
@@ -1031,10 +1079,14 @@ socket.on('room-state', (roomState) => {
   handleStateSounds(roomState);
   currentLobbyState = roomState;
   
-  // Sync lobby language
-  if (roomState.language && roomState.language !== currentLanguage) {
-    currentLanguage = roomState.language;
-    updateUILanguage();
+  // Clear answer/question inputs if the question changes
+  const currentQId = roomState.currentQuestion ? roomState.currentQuestion.id : null;
+  if (currentQId !== lastQuestionId) {
+    lastQuestionId = currentQId;
+    const answerInput = document.getElementById('answer-input');
+    if (answerInput) answerInput.value = '';
+    const questionInput = document.getElementById('question-input');
+    if (questionInput) questionInput.value = '';
   }
   
   // Transition screens based on state
@@ -1059,6 +1111,28 @@ socket.on('room-state', (roomState) => {
       renderResultsView(roomState);
       switchScreen('results');
       break;
+  }
+
+  // Update round counter global display
+  const isLobby = roomState.gameState === 'LOBBY';
+  const isResults = roomState.gameState === 'RESULTS';
+  const inGame = !isLobby && !isResults;
+
+  const globalRoundCounter = document.getElementById('global-round-counter');
+  if (globalRoundCounter) {
+    if (inGame) {
+      globalRoundCounter.style.display = 'inline-block';
+      document.getElementById('global-round-current').textContent = roomState.currentRound;
+      document.getElementById('global-round-max').textContent = roomState.maxRounds;
+    } else {
+      globalRoundCounter.style.display = 'none';
+    }
+  }
+
+  // Show/hide abandon button (visible in game and results)
+  const abandonBtn = document.getElementById('abandonGameBtn');
+  if (abandonBtn) {
+    abandonBtn.style.display = (inGame || isResults) ? 'inline-block' : 'none';
   }
 
   // Show reaction bar only during active game phases (not lobby / results)
@@ -1288,6 +1362,18 @@ function renderAnsweringView(state) {
       submitBtn.querySelector('span').textContent = i18n[currentLanguage].submitAnswerBtnLabel;
       if (formContainer) formContainer.style.display = 'block';
       if (submittedContainer) submittedContainer.style.display = 'none';
+
+      // Auto-submit if timer is low and player typed something
+      if (state.timer <= 2) {
+        const answerInput = document.getElementById('answer-input');
+        const answerText = answerInput ? answerInput.value.trim() : '';
+        if (answerText) {
+          socket.emit('submit-answer', { answerText });
+          answerInput.value = '';
+          if (formContainer) formContainer.style.display = 'none';
+          if (submittedContainer) submittedContainer.style.display = 'flex';
+        }
+      }
     } else {
       if (formContainer) formContainer.style.display = 'none';
       if (submittedContainer) submittedContainer.style.display = 'flex';
@@ -1357,7 +1443,12 @@ function renderJudgingView(state) {
       zh: `由 <span id="reveal-player-name">${currentAnswer.username}</span> 提供的答案`
     };
     document.querySelector('.reveal-badge').innerHTML = proposedBy[lang];
-    document.getElementById('reveal-answer-bubble').textContent = `"${currentAnswer.answerText}"`;
+    
+    let answerDisplay = currentAnswer.answerText;
+    if (answerDisplay === '__NO_ANSWER__') {
+      answerDisplay = i18n[lang].noAnswerText || "[No answer]";
+    }
+    document.getElementById('reveal-answer-bubble').textContent = `"${answerDisplay}"`;
   }
 
   const isQuestioner = state.currentQuestioner.id === socket.id;
