@@ -10,7 +10,7 @@
     "text": {
       "fr": "Quel est mon plat préféré quand je suis fatigué ?",
       "en": "What is my favorite meal when I am tired?",
-      "es": "¿Cuál es mi comida favorita quand estoy cansado?",
+      "es": "¿Cuál es mi comida favorita cuando estoy cansado?",
       "zh": "我累的时候最喜欢吃什么菜？"
     }
   },
@@ -72,6 +72,456 @@
       "en": "What is the last movie or TV show that made me cry?",
       "es": "¿Cuál es la última película o serie que me hizo llorar?",
       "zh": "最近一部让我流泪的电影或电视剧是什么？"
+    }
+  },
+  {
+    "id": 6,
+    "category": {
+      "fr": "Personnel",
+      "en": "Personal",
+      "es": "Personal",
+      "zh": "个人"
+    },
+    "text": {
+      "fr": "Quel est mon pire tue-l'amour (red flag) chez quelqu'un ?",
+      "en": "What is my biggest turn-off (red flag) in a person?",
+      "es": "¿Cuál es mi mayor red flag o lo que más me desenamora de alguien?",
+      "zh": "在一个人身上我最不能接受的缺点（雷区）是什么？"
+    }
+  },
+  {
+    "id": 7,
+    "category": {
+      "fr": "Fun",
+      "en": "Fun",
+      "es": "Diversión",
+      "zh": "趣味"
+    },
+    "text": {
+      "fr": "Quel super-pouvoir inutile aimerais-je secrètement avoir ?",
+      "en": "What useless superpower would I secretly want to have?",
+      "es": "¿Qué superpoder inútil me gustaría tener en secreto?",
+      "zh": "我暗地里最想拥有什么没用的超能力？"
+    }
+  },
+  {
+    "id": 8,
+    "category": {
+      "fr": "Musique",
+      "en": "Music",
+      "es": "Música",
+      "zh": "音乐"
+    },
+    "text": {
+      "fr": "Quelle est la pire chanson que j'écoute en cachette (plaisir coupable) ?",
+      "en": "What is the worst song that I secretly listen to (guilty pleasure)?",
+      "es": "¿Cuál es la peor canción que escucho en secreto (placer culposo)?",
+      "zh": "我偷偷听的最难听的歌（羞愧但快乐的歌）是什么？"
+    }
+  },
+  {
+    "id": 9,
+    "category": {
+      "fr": "Survie",
+      "en": "Survival",
+      "es": "Supervivencia",
+      "zh": "生存"
+    },
+    "text": {
+      "fr": "Combien de temps pourrais-je survivre à une invasion de zombies ?",
+      "en": "How long would I survive in a zombie apocalypse?",
+      "es": "¿Cuánto tiempo sobreviviría a una invasión zombi?",
+      "zh": "如果爆发丧尸危机，我能活多久？"
+    }
+  },
+  {
+    "id": 10,
+    "category": {
+      "fr": "Shopping",
+      "en": "Shopping",
+      "es": "Compras",
+      "zh": "购物"
+    },
+    "text": {
+      "fr": "Quel est le dernier achat stupide ou inutile que j'ai fait ?",
+      "en": "What is the last stupid or useless purchase I made?",
+      "es": "¿Cuál es la última compra estúpida o inútil que hice?",
+      "zh": "我最近一次买的愚蠢或没用的东西是什么？"
+    }
+  },
+  {
+    "id": 11,
+    "category": {
+      "fr": "Habitude",
+      "en": "Habit",
+      "es": "Hábito",
+      "zh": "习惯"
+    },
+    "text": {
+      "fr": "Quel est mon juron ou gros mot préféré ?",
+      "en": "What is my favorite swear word or curse?",
+      "es": "¿Cuál es mi grosería o insulto favorito?",
+      "zh": "我最喜欢的口头禅或脏话是什么？"
+    }
+  },
+  {
+    "id": 12,
+    "category": {
+      "fr": "Fun",
+      "en": "Fun",
+      "es": "Diversión",
+      "zh": "趣味"
+    },
+    "text": {
+      "fr": "Si j'étais un animal, lequel représenterais-je le mieux ?",
+      "en": "If I were an animal, which one would represent me best?",
+      "es": "Si fuera un animal, ¿cuál me representaría mejor?",
+      "zh": "如果我是一只动物，哪种最能代表我？"
+    }
+  },
+  {
+    "id": 13,
+    "category": {
+      "fr": "Pop Culture",
+      "en": "Pop Culture",
+      "es": "Cultura Pop",
+      "zh": "流行文化"
+    },
+    "text": {
+      "fr": "Quelle est ma série ou émission plaisir coupable ?",
+      "en": "What is my guilty pleasure TV show or series?",
+      "es": "¿Cuál es mi serie o programa de televisión placer culposo?",
+      "zh": "哪部电视剧或综艺是我羞于承认但很爱看的？"
+    }
+  },
+  {
+    "id": 14,
+    "category": {
+      "fr": "Personnel",
+      "en": "Personal",
+      "es": "Personal",
+      "zh": "个人"
+    },
+    "text": {
+      "fr": "Quelle est la chose la plus folle que j'ai faite par défi ?",
+      "en": "What is the craziest thing I've ever done on a dare?",
+      "es": "¿Qué es lo más loco que he hecho por un desafío?",
+      "zh": "我因打赌做过最疯狂的事是什么？"
+    }
+  },
+  {
+    "id": 15,
+    "category": {
+      "fr": "Hobby",
+      "en": "Hobby",
+      "es": "Afición",
+      "zh": "爱好"
+    },
+    "text": {
+      "fr": "Quelle activité pourrais-je pratiquer pendant des heures sans m'ennuyer ?",
+      "en": "What activity could I do for hours without getting bored?",
+      "es": "¿Qué actividad podría hacer durante horas sin aburrirme?",
+      "zh": "什么活动我可以连续做几个小时而不觉得无聊？"
+    }
+  },
+  {
+    "id": 16,
+    "category": {
+      "fr": "Nourriture",
+      "en": "Food",
+      "es": "Comida",
+      "zh": "食物"
+    },
+    "text": {
+      "fr": "Quel ingrédient est pour moi un sacrilège absolu sur une pizza ?",
+      "en": "What pizza topping do I consider an absolute crime?",
+      "es": "¿Qué ingrediente en una pizza considero un sacrilegio absoluto?",
+      "zh": "比萨上放什么配料对我来说是绝对无法容忍的？"
+    }
+  },
+  {
+    "id": 17,
+    "category": {
+      "fr": "Enfance",
+      "en": "Childhood",
+      "es": "Infancia",
+      "zh": "童年"
+    },
+    "text": {
+      "fr": "Quel était mon dessin animé préféré quand j'étais petit ?",
+      "en": "What was my favorite cartoon when I was a kid?",
+      "es": "¿Cuál era mi dibujo animado favorito cuando era niño?",
+      "zh": "我小时候最喜欢的卡通片是什么？"
+    }
+  },
+  {
+    "id": 18,
+    "category": {
+      "fr": "Hobby",
+      "en": "Hobby",
+      "es": "Afición",
+      "zh": "爱好"
+    },
+    "text": {
+      "fr": "Si je gagnais au loto demain, quel serait mon tout premier achat ?",
+      "en": "If I won the lottery tomorrow, what would be my very first purchase?",
+      "es": "Si ganara la lotería mañana, ¿cuál sería mi primera compra?",
+      "zh": "如果我明天中了大奖，第一件买的东西会是什么？"
+    }
+  },
+  {
+    "id": 19,
+    "category": {
+      "fr": "Habitude",
+      "en": "Habit",
+      "es": "Hábito",
+      "zh": "习惯"
+    },
+    "text": {
+      "fr": "Quelle est ma pire manie ou habitude bizarre au quotidien ?",
+      "en": "What is my worst quirk or weird daily habit?",
+      "es": "¿Cuál es mi peor manía o hábito diario extraño?",
+      "zh": "我日常生活中最糟糕的怪癖或怪癖习惯是什么？"
+    }
+  },
+  {
+    "id": 20,
+    "category": {
+      "fr": "Voyage",
+      "en": "Travel",
+      "es": "Viaje",
+      "zh": "旅行"
+    },
+    "text": {
+      "fr": "Quelle est la destination de mes vacances de rêve absolues ?",
+      "en": "What is my absolute dream vacation destination?",
+      "es": "¿Cuál es el destino de mis vacaciones de ensueño absolutas?",
+      "zh": "我绝对梦寐以求的度假目的地是哪里？"
+    }
+  },
+  {
+    "id": 21,
+    "category": {
+      "fr": "Pop Culture",
+      "en": "Pop Culture",
+      "es": "Cultura Pop",
+      "zh": "流行文化"
+    },
+    "text": {
+      "fr": "Quel acteur ou actrice jouerait mon rôle dans un film sur ma vie ?",
+      "en": "Which actor or actress would play me in a movie about my life?",
+      "es": "¿Qué actor o actriz haría mi papel en una película sobre mi vida?",
+      "zh": "如果拍一部关于我人生的电影，哪个演员最适合演我？"
+    }
+  },
+  {
+    "id": 22,
+    "category": {
+      "fr": "Personnel",
+      "en": "Personal",
+      "es": "Personal",
+      "zh": "个人"
+    },
+    "text": {
+      "fr": "Quelle est la compétence ou le talent caché que j'aimerais avoir ?",
+      "en": "What skill or hidden talent do I wish I had?",
+      "es": "¿Qué habilidad o talento oculto desearía tener?",
+      "zh": "我最希望拥有什么技能或隐藏天赋？"
+    }
+  },
+  {
+    "id": 23,
+    "category": {
+      "fr": "Style de vie",
+      "en": "Lifestyle",
+      "es": "Estilo de vida",
+      "zh": "生活方式"
+    },
+    "text": {
+      "fr": "Si je devais ne boire qu'une seule boisson pour le restant de mes jours ?",
+      "en": "If I had to drink only one beverage for the rest of my life?",
+      "es": "Si tuviera que beber una sola bebida por el resto de mi vida, ¿cuál sería?",
+      "zh": "如果我的余生只能喝一种饮料，会是什么？"
+    }
+  },
+  {
+    "id": 24,
+    "category": {
+      "fr": "Technologie",
+      "en": "Technology",
+      "es": "Tecnología",
+      "zh": "技术"
+    },
+    "text": {
+      "fr": "Sur quelle application de mon téléphone est-ce que je passe le plus de temps ?",
+      "en": "On which phone app do I spend the most time?",
+      "es": "¿En qué aplicación de mi teléfono paso la mayor parte del tiempo?",
+      "zh": "我手机上用得最多的应用（App）是哪一个？"
+    }
+  },
+  {
+    "id": 25,
+    "category": {
+      "fr": "Pop Culture",
+      "en": "Pop Culture",
+      "es": "Cultura Pop",
+      "zh": "流行文化"
+    },
+    "text": {
+      "fr": "Quelle était ma saga préférée ado (Harry Potter, Twilight, Star Wars...) ?",
+      "en": "What was my favorite teen franchise (Harry Potter, Twilight, Star Wars...)?",
+      "es": "¿Cuál era mi saga favorita de adolescente (Harry Potter, Crepúsculo, Star Wars...)?",
+      "zh": "我青少年时期最喜欢的系列IP（哈利波特、暮光之城、星球大战等）是什么？"
+    }
+  },
+  {
+    "id": 26,
+    "category": {
+      "fr": "Personnel",
+      "en": "Personal",
+      "es": "Personal",
+      "zh": "个人"
+    },
+    "text": {
+      "fr": "À quel âge ai-je eu mon premier téléphone portable ?",
+      "en": "At what age did I get my first mobile phone?",
+      "es": "¿A qué edad tuve mi primer teléfono móvil?",
+      "zh": "我几岁拥有了第一部手机？"
+    }
+  },
+  {
+    "id": 27,
+    "category": {
+      "fr": "Style de vie",
+      "en": "Lifestyle",
+      "es": "Estilo de vida",
+      "zh": "生活方式"
+    },
+    "text": {
+      "fr": "Combien de réveils est-ce que je règle pour être sûr de me lever le matin ?",
+      "en": "How many alarms do I set to make sure I wake up in the morning?",
+      "es": "¿Cuántas alarmas programo para asegurarme de despertarme por la mañana?",
+      "zh": "为了早上能起床，我通常设置几个闹钟？"
+    }
+  },
+  {
+    "id": 28,
+    "category": {
+      "fr": "Travailler",
+      "en": "Work",
+      "es": "Trabajo",
+      "zh": "工作"
+    },
+    "text": {
+      "fr": "Quel était mon job de rêve quand j'avais 10 ans ?",
+      "en": "What was my dream job when I was 10 years old?",
+      "es": "¿Cuál era el trabajo de mis sueños cuando tenía 10 años?",
+      "zh": "我10岁时的梦想职业是什么？"
+    }
+  },
+  {
+    "id": 29,
+    "category": {
+      "fr": "Voyage",
+      "en": "Travel",
+      "es": "Viaje",
+      "zh": "旅行"
+    },
+    "text": {
+      "fr": "Suis-je plutôt vacances à la plage, à la montagne ou découverte en ville ?",
+      "en": "Am I more of a beach, mountain, or city exploration vacation person?",
+      "es": "¿Soy más de vacaciones en la playa, en la montaña o explorando la ciudad?",
+      "zh": "我更喜欢海滩度假、登山还是城市探险旅行？"
+    }
+  },
+  {
+    "id": 30,
+    "category": {
+      "fr": "Fun",
+      "en": "Fun",
+      "es": "Diversión",
+      "zh": "趣味"
+    },
+    "text": {
+      "fr": "Quel mot ou expression est-ce que je répète beaucoup trop ?",
+      "en": "What word or phrase do I repeat way too much?",
+      "es": "¿Qué palabra o frase repito demasiado?",
+      "zh": "什么词或短语是我平时说得太频繁的？"
+    }
+  },
+  {
+    "id": 31,
+    "category": {
+      "fr": "Personnel",
+      "en": "Personal",
+      "es": "Personal",
+      "zh": "个人"
+    },
+    "text": {
+      "fr": "Quelle est la corvée ménagère que je déteste le plus faire ?",
+      "en": "What household chore do I hate doing the most?",
+      "es": "¿Qué tarea doméstica odio hacer más?",
+      "zh": "我最讨厌做什么家务？"
+    }
+  },
+  {
+    "id": 32,
+    "category": {
+      "fr": "Nourriture",
+      "en": "Food",
+      "es": "Comida",
+      "zh": "食物"
+    },
+    "text": {
+      "fr": "Suis-je plutôt sucré ou salé ?",
+      "en": "Am I more of a sweet or savory person?",
+      "es": "¿Soy más de dulce o salado?",
+      "zh": "我更偏爱甜食还是咸食？"
+    }
+  },
+  {
+    "id": 33,
+    "category": {
+      "fr": "Habitude",
+      "en": "Habit",
+      "es": "Hábito",
+      "zh": "习惯"
+    },
+    "text": {
+      "fr": "Combien de tasses de café ou thé est-ce que je bois par jour ?",
+      "en": "How many cups of coffee or tea do I drink per day?",
+      "es": "¿Cuántas tazas de café o té bebo al día?",
+      "zh": "我一天喝几杯咖啡或茶？"
+    }
+  },
+  {
+    "id": 34,
+    "category": {
+      "fr": "Habitude",
+      "en": "Habit",
+      "es": "Hábito",
+      "zh": "习惯"
+    },
+    "text": {
+      "fr": "Quelle est la température idéale de ma douche (brûlante, tiède, froide) ?",
+      "en": "What is my ideal shower temperature (scalding hot, lukewarm, cold)?",
+      "es": "¿Cuál es la temperatura ideal de mi ducha (hirviendo, templada, fría)?",
+      "zh": "我洗澡的理想水温是多少（滚烫、温水、凉水）？"
+    }
+  },
+  {
+    "id": 35,
+    "category": {
+      "fr": "Personnel",
+      "en": "Personal",
+      "es": "Personal",
+      "zh": "个人"
+    },
+    "text": {
+      "fr": "À quelle heure est-ce que je me réveille généralement le week-end ?",
+      "en": "What time do I usually wake up on weekends?",
+      "es": "¿A qué hora me suelo despertar los fines de semana?",
+      "zh": "周末我通常几点醒来？"
     }
   }
 ]
