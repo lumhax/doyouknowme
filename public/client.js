@@ -124,7 +124,7 @@ const i18n = {
     playersLabel: "JOUEURS",
     lobbyTitle: "SALON DE JEU",
     lobbyCodeLabel: "CODE DU SALON",
-    copyLinkLabel: "Copier le lien",
+    copyCodeBtnLabel: "Copier le code",
     readyBtnLabel: "S'INSCRIRE COMME PRÊT",
     readyBtnActive: "JE SUIS PRÊT !",
     yourTurnTitle: "C'EST VOTRE TOUR DE CHOISIR !",
@@ -181,7 +181,7 @@ const i18n = {
     playersLabel: "PLAYERS",
     lobbyTitle: "GAME LOBBY",
     lobbyCodeLabel: "LOBBY CODE",
-    copyLinkLabel: "Copy link",
+    copyCodeBtnLabel: "Copy code",
     readyBtnLabel: "MARK AS READY",
     readyBtnActive: "I AM READY!",
     yourTurnTitle: "IT'S YOUR TURN TO CHOOSE!",
@@ -238,7 +238,7 @@ const i18n = {
     playersLabel: "JUGADORES",
     lobbyTitle: "SALA DE JUEGO",
     lobbyCodeLabel: "CÓDIGO DE SALA",
-    copyLinkLabel: "Copiar enlace",
+    copyCodeBtnLabel: "Copiar código",
     readyBtnLabel: "MARCAR COMO LISTO",
     readyBtnActive: "¡ESTOY LISTO!",
     yourTurnTitle: "¡ES TU TURN DE ELEGIR!",
@@ -295,7 +295,7 @@ const i18n = {
     playersLabel: "玩家",
     lobbyTitle: "游戏大厅",
     lobbyCodeLabel: "房间代码",
-    copyLinkLabel: "复制链接",
+    copyCodeBtnLabel: "复制代码",
     readyBtnLabel: "标记为准备",
     readyBtnActive: "我准备好了！",
     yourTurnTitle: "轮到你选择了！",
@@ -756,12 +756,12 @@ function setupEventListeners() {
     if (!currentLobbyState) return;
     const lobbyId = currentLobbyState.lobbyId;
     
-    // Copy only code or build local URL
+    // Copy only code
     const copyMessages = {
-      fr: { copied: "Copié !", label: "Copier le lien" },
-      en: { copied: "Copied!", label: "Copy link" },
-      es: { copied: "¡Copiado!", label: "Copiar enlace" },
-      zh: { copied: "已复制!", label: "复制链接" }
+      fr: { copied: "Copié !", label: "Copier le code" },
+      en: { copied: "Copied!", label: "Copy code" },
+      es: { copied: "¡Copiado!", label: "Copiar código" },
+      zh: { copied: "已复制!", label: "复制代码" }
     };
     const lang = currentLanguage;
     navigator.clipboard.writeText(lobbyId).then(() => {

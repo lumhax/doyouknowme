@@ -3071,7 +3071,7 @@ html.dark-theme {
 
 .toast-container {
   position: fixed;
-  top: 20px;
+  top: 90px;
   right: 20px;
   z-index: 9998;
   display: flex;
@@ -3224,16 +3224,20 @@ html.dark-theme {
 
 .global-round-counter {
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 900;
   color: var(--color-dark);
   background: var(--neon-cyan);
   border: 3px solid var(--color-dark);
-  padding: 6px 12px;
-  border-radius: 10px;
+  padding: 8px 18px;
+  border-radius: 12px;
   box-shadow: 2px 2px 0 var(--color-dark);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 .dark-theme .global-round-counter {
@@ -3279,4 +3283,15 @@ html.dark-theme {
 .dark-theme #abandonGameBtn:active {
   transform: translateY(2px);
   box-shadow: 0 0 0 #1a1520 !important;
+}
+
+/* Mobile responsive scaling for header widgets */
+@media (max-width: 600px) {
+  .global-round-counter,
+  #abandonGameBtn {
+    font-size: 11px !important;
+    padding: 6px 12px !important;
+    border-radius: 8px !important;
+    border-width: 2px !important;
+  }
 }
