@@ -3071,7 +3071,7 @@ html.dark-theme {
 
 .toast-container {
   position: fixed;
-  bottom: 80px;
+  bottom: 110px;
   left: 20px;
   z-index: 9998;
   display: flex;
