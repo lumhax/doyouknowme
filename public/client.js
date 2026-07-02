@@ -634,18 +634,12 @@ function switchScreen(screenId) {
     }
   });
 
-  // Show ads only in login (main menu) and lobby screens, hide elsewhere
-  const adLeft = document.getElementById('ad-left');
-  const adRight = document.getElementById('ad-right');
-  if (adLeft && adRight) {
-    const showAds = (screenId === 'login' || screenId === 'lobby');
-    if (showAds) {
-      adLeft.classList.remove('ad-hidden');
-      adRight.classList.remove('ad-hidden');
-    } else {
-      adLeft.classList.add('ad-hidden');
-      adRight.classList.add('ad-hidden');
-    }
+  // Toggle game-active class on body to hide dynamically injected ads during active game
+  const isGameplay = (screenId !== 'login' && screenId !== 'lobby');
+  if (isGameplay) {
+    document.body.classList.add('game-active');
+  } else {
+    document.body.classList.remove('game-active');
   }
 }
 
