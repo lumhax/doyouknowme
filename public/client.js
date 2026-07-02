@@ -641,6 +641,20 @@ function switchScreen(screenId) {
   } else {
     document.body.classList.remove('game-active');
   }
+
+  // Show sidebar ads only in login (main menu) and lobby screens, hide elsewhere
+  const adLeft = document.getElementById('ad-left');
+  const adRight = document.getElementById('ad-right');
+  if (adLeft && adRight) {
+    const showAds = (screenId === 'login' || screenId === 'lobby');
+    if (showAds) {
+      adLeft.classList.remove('ad-hidden');
+      adRight.classList.remove('ad-hidden');
+    } else {
+      adLeft.classList.add('ad-hidden');
+      adRight.classList.add('ad-hidden');
+    }
+  }
 }
 
 // EVENT LISTENERS SETUP
