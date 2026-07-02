@@ -123,6 +123,7 @@ const i18n = {
     howToPlay: "COMMENT JOUER",
     playersLabel: "JOUEURS",
     lobbyTitle: "SALON DE JEU",
+    adLabel: "Sponsorisé",
     lobbyCodeLabel: "CODE DU SALON",
     copyCodeBtnLabel: "Copier le code",
     readyBtnLabel: "S'INSCRIRE COMME PRÊT",
@@ -180,6 +181,7 @@ const i18n = {
     howToPlay: "HOW TO PLAY",
     playersLabel: "PLAYERS",
     lobbyTitle: "GAME LOBBY",
+    adLabel: "Sponsored",
     lobbyCodeLabel: "LOBBY CODE",
     copyCodeBtnLabel: "Copy code",
     readyBtnLabel: "MARK AS READY",
@@ -237,6 +239,7 @@ const i18n = {
     howToPlay: "CÓMO JUGAR",
     playersLabel: "JUGADORES",
     lobbyTitle: "SALA DE JUEGO",
+    adLabel: "Patrocinado",
     lobbyCodeLabel: "CÓDIGO DE SALA",
     copyCodeBtnLabel: "Copiar código",
     readyBtnLabel: "MARCAR COMO LISTO",
@@ -294,6 +297,7 @@ const i18n = {
     howToPlay: "游戏玩法",
     playersLabel: "玩家",
     lobbyTitle: "游戏大厅",
+    adLabel: "赞助商广告",
     lobbyCodeLabel: "房间代码",
     copyCodeBtnLabel: "复制代码",
     readyBtnLabel: "标记为准备",
@@ -629,6 +633,20 @@ function switchScreen(screenId) {
       screens[key].classList.remove('active');
     }
   });
+
+  // Show ads only in login (main menu) and lobby screens, hide elsewhere
+  const adLeft = document.getElementById('ad-left');
+  const adRight = document.getElementById('ad-right');
+  if (adLeft && adRight) {
+    const showAds = (screenId === 'login' || screenId === 'lobby');
+    if (showAds) {
+      adLeft.classList.remove('ad-hidden');
+      adRight.classList.remove('ad-hidden');
+    } else {
+      adLeft.classList.add('ad-hidden');
+      adRight.classList.add('ad-hidden');
+    }
+  }
 }
 
 // EVENT LISTENERS SETUP

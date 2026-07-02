@@ -3295,3 +3295,152 @@ html.dark-theme {
     border-width: 2px !important;
   }
 }
+
+/* =============================================
+   🌐 SIDEBAR ADS (Left & Right)
+   ============================================= */
+
+.ad-banner-sidebar {
+  display: none; /* Hidden during splash screen */
+  position: fixed;
+  top: 52%;
+  transform: translateY(-50%);
+  width: 170px;
+  height: 520px;
+  background: #ffffff;
+  border: 4px solid var(--color-dark);
+  box-shadow: 6px 6px 0 var(--color-dark);
+  border-radius: 16px;
+  z-index: 5;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.ad-banner-sidebar.ad-left {
+  left: 24px;
+}
+
+.ad-banner-sidebar.ad-right {
+  right: 24px;
+}
+
+.ad-banner-sidebar:hover {
+  transform: translateY(-52%) rotate(1deg);
+  box-shadow: 8px 8px 0 var(--color-dark);
+}
+
+.ad-banner-sidebar.ad-left:hover {
+  transform: translateY(-52%) rotate(-1deg);
+}
+
+.game-container.started .ad-banner-sidebar {
+  display: flex; /* Display once the splash screen is dismissed */
+}
+
+.ad-banner-sidebar.ad-hidden {
+  display: none !important; /* Hide during active gameplay phases */
+}
+
+/* Ad header label */
+.ad-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--color-dark);
+  background: var(--neon-yellow);
+  border-bottom: 4px solid var(--color-dark);
+  padding: 6px 12px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ad-banner-sidebar.ad-right .ad-label {
+  background: var(--neon-pink);
+}
+
+/* Ad content body */
+.ad-content {
+  flex-grow: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #faf8f5;
+  position: relative;
+}
+
+.dark-theme .ad-content {
+  background: #1e1b26;
+}
+
+.dark-theme .ad-banner-sidebar {
+  background: #252131;
+  border-color: #534a66;
+  box-shadow: 6px 6px 0 #1a1520;
+}
+
+.dark-theme .ad-label {
+  border-bottom-color: #534a66;
+  color: #ffffff;
+}
+
+/* Mock Ad Box styling */
+.ad-mock-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  text-align: center;
+  font-family: var(--font-body);
+}
+
+.ad-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--color-dark);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.dark-theme .ad-title {
+  color: #ffffff;
+}
+
+.ad-desc {
+  font-size: 12px;
+  color: #666666;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+.dark-theme .ad-desc {
+  color: #a09cb0;
+}
+
+.ad-badge {
+  display: inline-block;
+  align-self: center;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 900;
+  color: #ffffff;
+  background: var(--color-dark);
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.dark-theme .ad-badge {
+  background: #534a66;
+}
+
+/* Hide ads on viewports below 1480px to prevent overlaps with cards */
+@media (max-width: 1480px) {
+  .ad-banner-sidebar {
+    display: none !important;
+  }
+}
